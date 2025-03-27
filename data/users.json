@@ -1,0 +1,16 @@
+[
+    {
+        "id": 0,
+        "usuario": "admin",
+        "contraseña": "1234",
+        "correo": "aguss@example.com",
+        "permisos": "admin"
+    },
+    {
+        "id": 1,
+        "usuario": "agus",
+        "contraseña": "1234",
+        "correo": "aguss@example.com",
+        "permisos": "cliente"
+    }
+]

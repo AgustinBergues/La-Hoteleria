@@ -30,7 +30,7 @@ def load_users():
 def home():
     return render_template('index.html')
 
-@app.route('/client')
+@app.route('/reservas')
 def client():
     return render_template("client.html")
 
@@ -52,11 +52,11 @@ def login():
         if _user == credenciales["usuario"] and _pass == credenciales["contraseña"]:
             permision = credenciales["permisos"]
             if permision == "cliente":
-                return render_template("client.html")
+                return redirect(url_for('client'))
             elif permision == "empleado":
-                return render_template("employee.html")
+                return redirect(url_for('employee'))
             elif permision == "admin":
-                return render_template("admin.html")
+                return redirect(url_for('admin'))
 
 
     return redirect(url_for('home'))
