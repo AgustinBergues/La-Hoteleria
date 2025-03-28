@@ -30,11 +30,11 @@ def load_users():
 def home():
     return render_template('index.html')
 
-@app.route('/reservas')
+@app.route('/hoteleria')
 def client():
     return render_template("client.html")
 
-@app.route('/employee')
+@app.route('/hoteleria')
 def employee():
     return render_template("employee.html")
 
@@ -42,7 +42,7 @@ def employee():
 def admin():
     return render_template("admin.html")
 
-@app.route('/form-login', methods=['GET','POST'])
+@app.route('/ingreso', methods=['GET','POST'])
 def login():
     data = load_users()
     _user = request.form['txtuser']
