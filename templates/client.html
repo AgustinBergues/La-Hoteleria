@@ -3,35 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/normalize.css">
-    <link rel="stylesheet" href="../static/style_client.css">
-    <title>Inicio | Hoteleria</title>
+    <title>Hoteles</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background: #0077b6;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+        }
+        .header-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px 15px;
+            transition: color 0.3s ease;
+        }
+        .header-button:hover {
+            color: #ffdd57;
+        }
+        .logo{
+            width: 85px;
+            height: 85px;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-bar input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .section h2 {
+            color: #0077b6;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .hotels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+        .hotel {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            width: 280px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hotel:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+        }
+        .hotel img {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+        }
+        .botonHotel {
+            display: inline-block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            background: #bbedfc;
+            color: black; 
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+            text-decoration: none ; 
+            text-align: center;
+        }       
+        a {
+            text-decoration: none;
+            color: inherit; 
+        }
+        .tituloHotel{
+            color: #0077b6;
+            font-size: 18px;
+        }
+        .hotel p {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        footer {
+            background: #0077b6;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
+    
     <header>
-        <h1 class="titulo">La Hoteleria</h1>
-    </header>
-
-    <div class="nav-bg">
-        <nav class="navegacion-principal contenedor">
-            <a href="#">Habitaciones</a>
-            <a href="#">Servicios</a>
-            <a href="#">Galeria</a>
-            <a href="#">Mi cuenta</a>
-        </nav>
-    </div>
-
-    <main>
-        <h2 class="titulo">Habitaciones de Lujo</h2>
-        
-        <div class="grid">
-            <div class="habitacion">
-                <a href="depto_review.html">
-                    <img src="" alt="Completar">
-                </a>
-            </div>
+        <a href="{{ url_for('home') }}"><button class="header-button" id="button_back">&#8592; Salir</button></a>
+        <h1 class="header-title">Hogar Viajero</h1>
+        <div>
+            <img src="./static/img/Hogar_Viajero.jpg" alt="" class="logo">
         </div>
-    </main>
+    </header>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar hoteles...">
+        </div>
+        <section class="section">
+            <h2>Hoteles más visitados</h2>
+            <div class="hotels">
+                {% for hotel in hoteles_mas_buscados %}
+                <div class="hotel">
+                    <a href="{{ url_for('ver_hotel', hotel_id=hotel.id) }}">
+                        <img src="{{ url_for('static', filename=hotel.portada.split('static/')[1]) }}" alt="{{ hotel.hotel }}">
+                        <p class="tituloHotel">{{ hotel.hotel }}</p>
+                        <p>${{ hotel.precios['Simple'] }} Habitación Simple</p>
+                        <p>${{ hotel.precios['Doble'] }} Habitación Doble</p>
+                        <p>${{ hotel.precios['Suite'] }} Habitación Suite</p>
+                        <p>{{ hotel.visitas }} visitas</p>
+                        <button class="botonHotel">Reservar</button>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Hoteles más económicos</h2>
+            <div class="hotels">
+                {% for hotel in hoteles_mas_economicos %}
+                <div class="hotel">
+                    <a href="{{ url_for('ver_hotel', hotel_id=hotel.id) }}">
+                        <img src="{{ url_for('static', filename=hotel.portada.split('static/')[1]) }}" alt="{{ hotel.hotel }}">
+                        <p class="tituloHotel">{{ hotel.hotel }}</p>
+                        <p>${{ hotel.precios['Simple'] }} Habitación Simple</p>
+                        <p>${{ hotel.precios['Doble'] }} Habitación Doble</p>
+                        <p>${{ hotel.precios['Suite'] }} Habitación Suite</p>
+                        <button class="botonHotel">Reservar</button>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Todos los Hoteles</h2>
+            <div class="hotels">
+                {% for hotel in hoteles_todos %}
+                <div class="hotel">
+                    <a href="{{ url_for('ver_hotel', hotel_id=hotel.id) }}">
+                        <img src="{{ url_for('static', filename=hotel.portada.split('static/')[1]) }}" alt="{{ hotel.hotel }}">
+                        <p class="tituloHotel">{{ hotel.hotel }}</p>
+                        <p>${{ hotel.precios['Simple'] }} Habitación Simple</p>
+                        <p>${{ hotel.precios['Doble'] }} Habitación Doble</p>
+                        <p>${{ hotel.precios['Suite'] }} Habitación Suite</p>
+                        <button class="botonHotel">Reservar</button>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
 
+    </div>
+    <footer>
+        <p>&copy; 2025 Hoteles - Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
