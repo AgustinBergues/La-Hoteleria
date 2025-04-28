@@ -40,5 +40,19 @@ function actualizarPrecio() {
     document.getElementById("precio-total").textContent = precio;
 }
 
+window.onload = actualizarPrecio;
 
-window.onload = actualizarPrecio;   
+
+
+//        Empleados
+
+document.getElementById('toggleFilters').addEventListener('click', () => {
+  const panel = document.getElementById('filtersPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+});
+
+
+
+function dinamic_button () {
+  const select = document.getElementById("confirm_check");
+}

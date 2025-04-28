@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../static/globals.css">
+  <link rel="stylesheet" href="../static/checks.css">
+  <title>Gestión de Entradas y Salidas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Barra lateral -->
+<nav>
+  <div>
+    <div class="logo">🏨</div>
+    <ul>
+      <li><a href="{{ url_for('empleado') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+      <li><a href="{{ url_for('checks') }}"><i class="fas fa-door-open"></i><span>Entradas/Salidas</span></a></li>
+      <li><a href="{{ url_for('error') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+    </ul>
+  </div>
+  <div class="bottom-links">
+    <ul>
+      <li><i class="fas fa-exclamation-circle"></i><span>Reportar Incidencia</span></li>
+      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  
+  <!-- Header superior -->
+  <header>
+    <div>Gestión de Entradas y Salidas</div>
+    <div class="notifications">🔔</div>
+  </header>
+
+  <!-- Contenido de la página -->
+  <div class="container">
+
+    <button id="toggleFilters" class="btn_filter abc">Filtrar Busqueda</button>
+
+    <div class="filters" id="filtersPanel" style="display: none;">
+      <select  id="hotelFilter">
+        <option value="">Todos los Hoteles</option>
+        <option value="Hotel A">Hotel A</option>
+        <option value="Hotel B">Hotel B</option>
+      </select>
+    
+      <label><input type="checkbox" id="checkinPending">Check-ins pendientes</label>
+      <label><input type="checkbox" id="checkoutPending">Check-outs pendientes</label>
+    
+      <button id="clearFilters">Limpiar filtro</button>
+    </div>
+
+
+    <table>
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Hotel</th>
+          <th>Habitación</th>
+          <th>Fecha de Entrada</th>
+          <th>Fecha de Salida</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data in reservas %}
+        <tr>
+          <td>{{ data.huesped }}</td>
+          <td>{{ data.hotel }}</td>
+          <td>{{ data.habitacion_n }}</td>
+          <td>{{ data.checkin }}</td>
+          <td>{{ data.checkout }}</td>
+          <td>{{ data.estado }}</td>
+          <td><button id="confirm_check">Cargando...</button></td>
+        </tr>
+        {% endfor %}
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+  <script src="../static/script.js"></script>
+</body>
+</html>

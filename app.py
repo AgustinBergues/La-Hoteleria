@@ -1,10 +1,15 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
 import json
 import os
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = '8273645912037485'  # Necesaria para usar flash
 DATA_FILE = 'static/hotels.json'
+hoy = datetime.today()
+hoy = hoy.strftime("%d/%m/%Y")
+
+print(hoy)
 
 impuestos = {
     "Alquiler_online": 10,  
@@ -18,13 +23,26 @@ def load_users():
         data = json.load(f)
     return data
 
+
 def cargar_hoteles():
     with open(DATA_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
     
+def cargar_reservas():
+    with open('data/reservas.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def cargar_mantenimientos():
+    with open('data/mantenimientos.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+
 def guardar_hoteles(hoteles):
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(hoteles, f, indent=4, ensure_ascii=False)
+
+
 
 @app.route('/')
 def home():
@@ -52,19 +70,6 @@ def client():
     hoteles_todos = cargar_hoteles()
 
     return render_template("client.html", hoteles_mas_buscados=hoteles_mas_buscados, hoteles_mas_economicos=hoteles_mas_economicos, hoteles_todos=hoteles_todos)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @app.route('/hotel/<int:hotel_id>')
@@ -108,25 +113,17 @@ def reservar():
 
 
 
+@app.route('/dashboard')
+def empleado():
+    mantenimientos = cargar_mantenimientos()
 
+    return render_template("dash_empleado.html", mantenimientos=mantenimientos)
 
+@app.route('/checks')
+def checks():
+    reservas = cargar_reservas()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return render_template("checks_empleado.html", reservas=reservas)
 
 
 
@@ -146,12 +143,18 @@ def login():
             permision = credenciales["permisos"]
             if permision == "cliente":
                 return redirect(url_for('client'))
+            elif permision == "empleado":
+                return redirect(url_for('empleado'))
             elif permision == "admin":
                 return redirect(url_for('admin'))
 
 
     return redirect(url_for('home'))
 
+
+@app.route('/error')
+def error():
+    return render_template("error_page.html")
 
 
 

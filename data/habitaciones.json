@@ -1,0 +1,7 @@
+[
+    { "id": 101, "hotel_id": 1, "tipo": "Suite", "estado": "Disponible" },
+    { "id": 102, "hotel_id": 1, "tipo": "Doble", "estado": "Ocupada" },
+    { "id": 101, "hotel_id": 1, "tipo": "Suite", "estado": "Disponible" },
+    { "id": 102, "hotel_id": 1, "tipo": "Doble", "estado": "Ocupada" }
+  ]
+  

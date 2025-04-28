@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/globals.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <title>Dashboard Empleado</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Barra lateral -->
+<nav>
+  <div>
+    <div class="logo">🏨</div>
+    <ul>
+      <li><a href="dash_empleado.html"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+      <li><a href="checks_empleado.html"><i class="fas fa-door-open"></i><span>Entradas/Salidas</span></a></li>
+      <li><a href="#"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+    </ul>
+  </div>
+  <div class="bottom-links">
+    <ul>
+      <li><i class="fas fa-exclamation-circle"></i><span>Reportar Incidencia</span></li>
+      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  
+  <!-- Header superior -->
+  <header>
+    <div>Dashboard Empleado</div>
+    <div class="notifications">🔔</div>
+  </header>
+
+  <!-- Contenido de la página -->
+  <div class="container">
+    
+    <!-- Tarjetas de contadores -->
+    <div class="cards">
+      <div class="card">
+        <h2>5</h2>
+        <p>Check-ins Pendientes</p>
+      </div>
+      <div class="card">
+        <h2>3</h2>
+        <p>Check-outs Pendientes</p>
+      </div>
+      <div class="card">
+        <h2>12</h2>
+        <p>Habitaciones Ocupadas</p>
+      </div>
+      <div class="card">
+        <h2>8</h2>
+        <p>Habitaciones Disponibles</p>
+      </div>
+    </div>
+
+    <!-- Tabla de mantenimientos programados -->
+    <div class="maintenance-overview">
+        <h3>Mantenimientos Programados</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Mantenimiento</th>
+              <th>Hotel</th>
+              <th>Habitación</th>
+              <th>Hora</th>
+              <th>Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Limpieza profunda</td>
+              <td>Duna</td>
+              <td>102</td>
+              <td>10:00 AM</td>
+              <td><button class="detalles">Ver detalle</button></td>
+            </tr>
+            <tr>
+              <td>Revisión de aire acondicionado</td>
+              <td>Luna</td>
+              <td>305</td>
+              <td>2:30 PM</td>
+              <td><button class="detalles">Ver detalle</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    <!-- Vista rápida de habitaciones -->
+    <div class="rooms-overview">
+      <h3>Estado general de las habitaciones</h3>
+      <div class="rooms-status">
+        <div>Disponibles: 8</div>
+        <div>Ocupadas: 12</div>
+        <div>En mantenimiento: 2</div>
+      </div>
+      <button>Ir a Habitaciones</button>
+    </div>
+
+
+  </div>
+
+</div>
+
+</body>
+</html>

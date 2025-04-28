@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "huesped": "Juan Pérez",
+    "hotel": "Duna",
+    "habitacion_n": 101,
+    "checkin": "20/01/2025",
+    "checkout": "15/05/2025",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 2,
+    "huesped": "María Gómez",
+    "hotel": "Sol Arena",
+    "habitacion_n": 202,
+    "checkin": "15/04/2025",
+    "checkout": "20/04/2025",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 3,
+    "huesped": "Carlos Ruiz",
+    "hotel": "Costa Azul",
+    "habitacion_n": 305,
+    "checkin": "10/03/2025",
+    "checkout": "17/03/2025",
+    "estado": "Check-out pendiente"
+  },
+  {
+    "id": 4,
+    "huesped": "Lucía Fernández",
+    "hotel": "Duna",
+    "habitacion_n": 104,
+    "checkin": "05/05/2025",
+    "checkout": "12/05/2025",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 5,
+    "huesped": "Matías Torres",
+    "hotel": "Sol Arena",
+    "habitacion_n": 210,
+    "checkin": "01/06/2025",
+    "checkout": "08/06/2025",
+    "estado": "Check-in pendiente"
+  }
+]

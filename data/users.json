@@ -8,6 +8,13 @@
     },
     {
         "id": 1,
+        "usuario": "empleado",
+        "contraseña": "1234",
+        "correo": "empleado@example.com",
+        "permisos": "empleado"
+    },
+    {
+        "id": 2,
         "usuario": "cliente",
         "contraseña": "1234",
         "correo": "example@example.com",
