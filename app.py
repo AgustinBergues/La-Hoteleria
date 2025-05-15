@@ -137,6 +137,7 @@ def login():
     data = load_users()
     _user = request.form['txtuser']
     _pass = request.form['txtpassword']
+    _user = _user.lower()
 
     for credenciales in data:
         if _user == credenciales["usuario"] and _pass == credenciales["contraseña"]:
