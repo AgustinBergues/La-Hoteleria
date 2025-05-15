@@ -130,7 +130,7 @@ def checks():
 
 @app.route('/admin')
 def admin():
-    return render_template("admin.html")
+    return render_template("dashboard_admin.html")
 
 @app.route('/form-login', methods=['GET','POST'])
 def login():

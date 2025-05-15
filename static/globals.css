@@ -71,12 +71,17 @@ nav .bottom-links {
 
 
 header {
-  background-color: #4CAF50;
+  background-color: #0077b6;
   color: white;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+header .title {
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
 }
 header .notifications {
   font-size: 1.5rem;

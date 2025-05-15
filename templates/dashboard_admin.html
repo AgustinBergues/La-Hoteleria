@@ -5,60 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Administrador - Dashboard</title>
   <link rel="stylesheet" href="../static/globals.css">
-  <link rel="stylesheet" href="../static/admin.css">
+  <link rel="stylesheet" href="../static/a_dashboard.css">
   <script src="../static/admin.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-  <!-- Sidebar -->
   <nav>
-    <div class="logo">🏨</div>
-    <ul>
-      <li><a href="dashboard_admin.html"><i class="fas fa-home"></i><span>Inicio</span></a></li>
-      <li><a href="hoteles_admin.html"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
-      <li><a href="habitaciones_admin.html"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
-      <li><a href="reservas_admin.html"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
-      <li><a href="mantenimientos_admin.html"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
-      <li><a href="usuarios_admin.html"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
-      <li><a href="reportes_admin.html"><i class="fas fa-chart-line"></i><span>Reportes</span></a></li>
-      <li><a href="incidencias_admin.html"><i class="fas fa-exclamation-triangle"></i><span>Incidencias</span></a></li>
-    </ul>
+    <div>
+      <div class="logo">🏨</div>
+      <ul>
+        <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+        <li><a href="{{ url_for('error') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+        <li><a href="{{ url_for('error') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+        <li><a href="{{ url_for('error') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+        <li><a href="{{ url_for('error') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+        <li><a href="{{ url_for('error') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+        <li><a href="{{ url_for('error') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+      </ul>
+    </div>
     <div class="bottom-links">
-      <a href="#"><i class="fas fa-user-cog"></i><span>Cuenta</span></a>
+      <ul>
+        <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+      </ul>
     </div>
   </nav>
+<!-- Contenido principal -->
+<div class="main-content">
+  
+  <!-- Header superior -->
+  <header>
+    <div class="title">Dashboard Empleado</div>
+    <div class="notifications">🔔</div>
+  </header>
 
-  <!-- Contenido principal -->
-  <main style="margin-left: 60px; padding: 1rem;"> <!-- Dejo margen para el nav -->
-    <!-- Header -->
-    <header>
-      <h1>Panel de Administración</h1>
-      <div class="notifications">
-        <i class="fas fa-bell"></i>
-      </div>
-    </header>
+  <!-- Contenido de la página -->
+  <div class="container">
 
-    <!-- Dashboard -->
-    <section class="dashboard">
-      <div class="card">
-        <h3>Reservas activas</h3>
-        <p>128</p>
-      </div>
-      <div class="card">
-        <h3>Ocupación promedio</h3>
-        <p>78%</p>
-      </div>
-      <div class="card">
-        <h3>Mantenimientos hoy</h3>
-        <p>5</p>
-      </div>
-      <div class="card">
-        <h3>Incidencias recientes</h3>
-        <p>2</p>
-      </div>
-    </section>
-  </main>
+  </div>
 
+</div>
 </body>
 </html>
