@@ -81,7 +81,7 @@ def ver_hotel(hotel_id):
     hotel = next((h for h in hoteles if h["id"] == hotel_id), None)
 
     if hotel:
-        hotel["visitas"] += 1  # Sumar visita
+        hotel["visitas"] += 1
         guardar_hoteles(hoteles)
 
         return render_template("ver_hotel.html", hotel=hotel)
@@ -156,6 +156,57 @@ def login():
 @app.route('/error')
 def error():
     return render_template("error_page.html")
+
+
+
+
+@app.route('/registro', methods=['GET'])
+def registro():
+    return render_template('register.html')
+
+
+@app.route('/registrar_usuario', methods=['POST'])
+def registrar_usuario():
+    users_file = 'data/users.json'
+
+    # Crear archivo si no existe
+    if not os.path.exists(users_file):
+        with open(users_file, 'w', encoding='utf-8') as f:
+            json.dump([], f, indent=4)
+
+    # Leer usuarios existentes
+    with open(users_file, 'r', encoding='utf-8') as f:
+        usuarios = json.load(f)
+
+    # Obtener el último ID usado
+    if usuarios:
+        ultimo_id = max(u.get("id", 0) for u in usuarios)
+    else:
+        ultimo_id = -1
+
+    nuevo_usuario = {
+        "id": ultimo_id + 1,
+        "nombre": request.form['nombre'],
+        "apellido": request.form['apellido'],
+        "telefono": request.form['telefono'],
+        "email": request.form['email'],
+        "password": request.form['password'],  # cifrar
+        "fecha_nacimiento": request.form['fecha'],
+        "permisos": "cliente"
+    }
+
+    usuarios.append(nuevo_usuario)
+
+    with open(users_file, 'w', encoding='utf-8') as f:
+        json.dump(usuarios, f, indent=4, ensure_ascii=False)
+
+    flash(f'Registro exitoso. ID asignado: {nuevo_usuario["id"]}', 'success')
+    return redirect(url_for('home'))
+
+
+
+
+
 
 
 
