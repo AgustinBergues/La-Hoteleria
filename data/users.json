@@ -1,1 +1,13 @@
-
+[
+    {
+        "id": 0,
+        "user": "cliente",
+        "nombre": "Agustin",
+        "apellido": "Bergues",
+        "telefono": "123456789",
+        "email": "ejemplo@gmail.com",
+        "password": "scrypt:32768:8:1$DRgdOIdAg2d5uEP4$3fa4fe73c748cc1bfe26a864e350553b7ce5e6fe444217cf9918cf891b1b9c233a13c549714ac680a14dc961e0dacd651f55fd1abb3860649a062068d20e5113",
+        "fecha_nacimiento": "2004-12-20",
+        "permisos": "cliente"
+    }
+]

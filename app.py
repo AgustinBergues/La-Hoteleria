@@ -2,6 +2,8 @@ from flask import Flask, request, render_template, redirect, url_for, flash
 import json
 import os
 from datetime import datetime
+from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.secret_key = '8273645912037485'  # Necesaria para usar flash
@@ -132,24 +134,27 @@ def checks():
 def admin():
     return render_template("dashboard_admin.html")
 
-@app.route('/form-login', methods=['GET','POST'])
+@app.route('/form-login', methods=['GET', 'POST'])
 def login():
     data = load_users()
-    _user = request.form['txtuser']
+    _user = request.form['txtuser'].lower()
     _pass = request.form['txtpassword']
-    _user = _user.lower()
 
     for credenciales in data:
-        if _user == credenciales["usuario"] and _pass == credenciales["contraseña"]:
-            permision = credenciales["permisos"]
-            if permision == "cliente":
-                return redirect(url_for('client'))
-            elif permision == "empleado":
-                return redirect(url_for('empleado'))
-            elif permision == "admin":
-                return redirect(url_for('admin'))
+        if _user == credenciales["user"].lower():
+            if check_password_hash(credenciales["password"], _pass):
+                permiso = credenciales["permisos"]
+                if permiso == "cliente":
+                    return redirect(url_for('client'))
+                elif permiso == "empleado":
+                    return redirect(url_for('empleado'))
+                elif permiso == "admin":
+                    return redirect(url_for('admin'))
+            else:
+                flash("Contraseña incorrecta", "error")
+                return redirect(url_for('home'))
 
-
+    flash("Usuario no encontrado", "error")
     return redirect(url_for('home'))
 
 
@@ -178,19 +183,33 @@ def registrar_usuario():
     with open(users_file, 'r', encoding='utf-8') as f:
         usuarios = json.load(f)
 
+    # Obtener datos del formulario
+    user_input = request.form['user']
+    email_input = request.form['email']
+
+    # Verificar si el usuario o el email ya existen
+    for u in usuarios:
+        if u['user'].lower() == user_input.lower():
+            flash('Nombre de usuario ya registrado. Elegí otro.', 'error')
+            return redirect(url_for('registro'))
+        if u['email'].lower() == email_input.lower():
+            flash('Correo electrónico ya registrado.', 'error')
+            return redirect(url_for('registro'))
+
     # Obtener el último ID usado
-    if usuarios:
-        ultimo_id = max(u.get("id", 0) for u in usuarios)
-    else:
-        ultimo_id = -1
+    ultimo_id = max((u.get("id", 0) for u in usuarios), default=-1)
+    if request.form['password'] != request.form['confirm-password']:
+        flash('La contraseña no coincide.', 'error')
+        return redirect(url_for('registro'))
 
     nuevo_usuario = {
         "id": ultimo_id + 1,
+        "user": user_input.lower(),
         "nombre": request.form['nombre'],
         "apellido": request.form['apellido'],
         "telefono": request.form['telefono'],
-        "email": request.form['email'],
-        "password": request.form['password'],  # cifrar
+        "email": email_input,
+        "password": generate_password_hash(request.form['password']),
         "fecha_nacimiento": request.form['fecha'],
         "permisos": "cliente"
     }

@@ -98,11 +98,25 @@
         flex-direction: column;
       }
     }
+    input.error {
+      border: 2px solid red;
+    }
+
+
   </style>
 </head>
 <body>
   <div class="form-container">
     <h1>Hogar Viajero</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <script>
+        alert("{{ message }}");
+      </script>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
     <form action="{{ url_for('registrar_usuario') }}" method="POST">
       <div class="form-group">
         <label for="usuario">Usuario</label>
@@ -153,5 +167,6 @@
       </div>
     </form>
   </div>
+
 </body>
 </html>
