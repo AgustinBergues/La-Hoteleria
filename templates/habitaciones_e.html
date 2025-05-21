@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/globals.css">
+    <link rel="stylesheet" href="../static/habitaciones_e.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Habitaciones</title>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="logo">🏨</div>
+    <ul>
+      <li><a href="{{ url_for('empleado') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+      <li><a href="{{ url_for('checks') }}"><i class="fas fa-door-open"></i><span>Entradas/Salidas</span></a></li>
+      <li><a href="{{ url_for('habitaciones_info') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+    </ul>
+  </div>
+  <div class="bottom-links">
+    <ul>
+      <li><i class="fas fa-exclamation-circle"></i><span>Reportar Incidencia</span></li>
+      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+    </ul>
+  </div>
+</nav>   
+
+
+<!-- Contenido principal -->
+<div class="main-content">
+  
+  <!-- Header superior -->
+  <header>
+    <div class="title">Habitaciones</div>
+    <div class="notifications">🔔</div>
+  </header>
+
+  <div class="container">
+
+    <table>
+        <thead>
+            <tr>
+              <th>Habitacion</th>
+              <th>Hotel</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>N° Reserva</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>102</td>
+              <td>Duna</td>
+              <td>Simple</td>
+              <td>Ocupada</td>
+              <td>116</td>
+              <td><button><i class="fa-solid fa-circle-info"></i></button></td>
+            </tr>
+            <tr>
+              <td>115</td>
+              <td>Marea Baja</td>
+              <td>Doble</td>
+              <td>Ocupada</td>
+              <td>16</td>
+              <td><button><i class="fa-solid fa-circle-info"></i></button></td>
+            </tr>
+
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+</div>
+
+</body>
+</html>

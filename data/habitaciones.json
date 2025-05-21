@@ -1,7 +1,1442 @@
 [
-    { "id": 101, "hotel_id": 1, "tipo": "Suite", "estado": "Disponible" },
-    { "id": 102, "hotel_id": 1, "tipo": "Doble", "estado": "Ocupada" },
-    { "id": 101, "hotel_id": 1, "tipo": "Suite", "estado": "Disponible" },
-    { "id": 102, "hotel_id": 1, "tipo": "Doble", "estado": "Ocupada" }
-  ]
-  
+  {
+    "id": 100,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 102,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 103,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 105,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 0,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 111,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 0,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 120,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 123,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Ocupada"
+  },
+  {
+    "id": 126,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 0,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 100,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Ocupada"
+  },
+  {
+    "id": 102,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Mantenimiento"
+  },
+  {
+    "id": 103,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Ocupada"
+  },
+  {
+    "id": 105,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 1,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 111,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 1,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 120,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 123,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 126,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 1,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 100,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 102,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 103,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 105,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 2,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 111,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 2,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 120,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 123,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 126,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 2,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 100,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 102,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 103,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 105,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 3,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Ocupada"
+  },
+  {
+    "id": 111,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 3,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 120,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Mantenimiento"
+  },
+  {
+    "id": 123,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 126,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 3,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 100,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 102,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 103,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 105,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 4,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 111,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 4,
+    "tipo": "Doble",
+    "estado": "Ocupada"
+  },
+  {
+    "id": 120,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 123,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 126,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 4,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 100,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 102,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 103,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 105,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 5,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 111,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 5,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 120,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 123,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 126,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 5,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 100,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 102,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 103,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 105,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 6,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 111,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 6,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 120,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 123,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 126,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 6,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 100,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 101,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 102,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 103,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 104,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 105,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 106,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 107,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 108,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 109,
+    "hotel_id": 7,
+    "tipo": "Simple",
+    "estado": "Disponible"
+  },
+  {
+    "id": 110,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 111,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 112,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 113,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 114,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 115,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 116,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 117,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 118,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 119,
+    "hotel_id": 7,
+    "tipo": "Doble",
+    "estado": "Disponible"
+  },
+  {
+    "id": 120,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 121,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 122,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 123,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 124,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 125,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 126,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 127,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 128,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  },
+  {
+    "id": 129,
+    "hotel_id": 7,
+    "tipo": "Suite",
+    "estado": "Disponible"
+  }
+]

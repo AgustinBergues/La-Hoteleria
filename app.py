@@ -38,6 +38,9 @@ def cargar_mantenimientos():
     with open('data/mantenimientos.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
+def cargar_habitaciones():
+    with open('data/habitaciones.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
 
 
 def guardar_hoteles(hoteles):
@@ -51,88 +54,6 @@ def home():
     return render_template('index.html')
 
 
-
-
-
-
-
-@app.route('/client')
-def client():
-    hoteles = cargar_hoteles()
-
-    # Ordenar por visitas, de mayor a menor
-    hoteles.sort(key=lambda h: h['visitas'], reverse=True)
-    hoteles_mas_buscados = hoteles[:3]  # Los 3 más buscados
-
-    # Ordenar por precio más bajo (habitación 'Simple')
-    hoteles.sort(key=lambda h: h['precios']['Simple'])
-    hoteles_mas_economicos = hoteles[:3]  # Los 3 más económicos
-
-   # Mostrar todos los hoteles
-    hoteles_todos = cargar_hoteles()
-
-    return render_template("client.html", hoteles_mas_buscados=hoteles_mas_buscados, hoteles_mas_economicos=hoteles_mas_economicos, hoteles_todos=hoteles_todos)
-
-
-@app.route('/hotel/<int:hotel_id>')
-def ver_hotel(hotel_id):
-    global hotel_actual
-    hoteles = cargar_hoteles()
-    hotel_actual = hotel_id
-    # Buscar hotel por id
-    hotel = next((h for h in hoteles if h["id"] == hotel_id), None)
-
-    if hotel:
-        hotel["visitas"] += 1
-        guardar_hoteles(hoteles)
-
-        return render_template("ver_hotel.html", hotel=hotel)
-    else:
-        return "Hotel no encontrado", 404
-
-@app.route('/formulario')
-def formulario_reserva():
-    hotel_id=hotel_actual
-    return render_template('Form.html', hotel_id=hotel_id)
-
-
-@app.route('/reservar', methods=['POST'])
-def reservar():
-    nombre = request.form.get('name')
-    telefono = request.form.get('phone')
-    correo = request.form.get('email')
-    habitacion = request.form.get('room')
-
-
-
-    print(f"Reserva recibida: {nombre}, {telefono}, {correo}, {habitacion}")
-
-
-    return redirect(url_for('client'))
-
-
-
-
-
-
-@app.route('/dashboard')
-def empleado():
-    mantenimientos = cargar_mantenimientos()
-
-    return render_template("dash_empleado.html", mantenimientos=mantenimientos)
-
-@app.route('/checks')
-def checks():
-    reservas = cargar_reservas()
-
-    return render_template("checks_empleado.html", reservas=reservas)
-
-
-
-
-@app.route('/admin')
-def admin():
-    return render_template("dashboard_admin.html")
 
 @app.route('/form-login', methods=['GET', 'POST'])
 def login():
@@ -156,13 +77,6 @@ def login():
 
     flash("Usuario no encontrado", "error")
     return redirect(url_for('home'))
-
-
-@app.route('/error')
-def error():
-    return render_template("error_page.html")
-
-
 
 
 @app.route('/registro', methods=['GET'])
@@ -221,6 +135,134 @@ def registrar_usuario():
 
     flash(f'Registro exitoso. ID asignado: {nuevo_usuario["id"]}', 'success')
     return redirect(url_for('home'))
+
+
+
+
+
+
+
+
+@app.route('/cliente')
+def client():
+    hoteles = cargar_hoteles()
+
+    # Ordenar por visitas, de mayor a menor
+    hoteles.sort(key=lambda h: h['visitas'], reverse=True)
+    hoteles_mas_buscados = hoteles[:3]  # Los 3 más buscados
+
+    # Ordenar por precio más bajo (habitación 'Simple')
+    hoteles.sort(key=lambda h: h['precios']['Simple'])
+    hoteles_mas_economicos = hoteles[:3]  # Los 3 más económicos
+
+   # Mostrar todos los hoteles
+    hoteles_todos = cargar_hoteles()
+
+    return render_template("client.html", hoteles_mas_buscados=hoteles_mas_buscados, hoteles_mas_economicos=hoteles_mas_economicos, hoteles_todos=hoteles_todos)
+
+
+@app.route('/hotel/<int:hotel_id>')
+def ver_hotel(hotel_id):
+    global hotel_actual
+    hoteles = cargar_hoteles()
+    hotel_actual = hotel_id
+    # Buscar hotel por id
+    hotel = next((h for h in hoteles if h["id"] == hotel_id), None)
+
+    if hotel:
+        hotel["visitas"] += 1
+        guardar_hoteles(hoteles)
+
+        return render_template("ver_hotel.html", hotel=hotel)
+    else:
+        return "Hotel no encontrado", 404
+
+
+
+
+
+
+@app.route('/formulario')
+def formulario_reserva():
+    hotel_id=hotel_actual
+    return render_template('Form.html', hotel_id=hotel_id)
+
+
+@app.route('/reservar', methods=['POST'])
+def reservar():
+    nombre = request.form.get('name')
+    telefono = request.form.get('phone')
+    correo = request.form.get('email')
+    habitacion = request.form.get('room')
+
+
+
+    print(f"Reserva recibida: {nombre}, {telefono}, {correo}, {habitacion}")
+
+
+    return redirect(url_for('client'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/empleado')
+def empleado():
+
+    reservas = cargar_reservas()
+    habitaciones = cargar_habitaciones()
+    mantenimientos = cargar_mantenimientos()
+
+    checkins = sum(1 for r in reservas if r['estado'] == 'Check-in pendiente')
+    checkouts = sum(1 for r in reservas if r['estado'] == 'Check-out pendiente')
+
+    disponibles = sum(1 for h in habitaciones if h['estado'].lower() == 'disponible')
+    ocupadas = sum(1 for h in habitaciones if h['estado'].lower() == 'ocupada')
+    mantenimiento = sum(1 for h in habitaciones if h['estado'].lower() == 'mantenimiento')
+
+    return render_template("dash_empleado.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento)
+
+@app.route('/checks')
+def checks():
+    reservas = cargar_reservas()
+
+    return render_template("checks_empleado.html", reservas=reservas)
+
+
+@app.route('/habitaciones')
+def habitaciones_info():
+    habitaciones = cargar_habitaciones()
+
+    return render_template("habitaciones_e.html", habitaciones=habitaciones)
+
+
+
+
+@app.route('/admin')
+def admin():
+    return render_template("dashboard_admin.html")
+
+
+
+
+@app.route('/error')
+def error():
+    return render_template("error_page.html")
+
+
+
+
+
+
 
 
 
