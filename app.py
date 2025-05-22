@@ -241,15 +241,37 @@ def checks():
 @app.route('/habitaciones')
 def habitaciones_info():
     habitaciones = cargar_habitaciones()
+    hotel = cargar_hoteles()
+    m_habitaciones = []
+    for u in habitaciones:
+        for i in hotel:
+            if u['hotel_id'] == i['id']:
+                n_hotel = i['hotel']
+                u['hotel_id'] = str(n_hotel).replace("Hotel ", "")
+                m_habitaciones.append(u)
 
-    return render_template("habitaciones_e.html", habitaciones=habitaciones)
+
+
+    return render_template("habitaciones_e.html", habitaciones=m_habitaciones)
 
 
 
 
 @app.route('/admin')
 def admin():
-    return render_template("dashboard_admin.html")
+
+    reservas = cargar_reservas()
+    habitaciones = cargar_habitaciones()
+    mantenimientos = cargar_mantenimientos()
+
+    checkins = sum(1 for r in reservas if r['estado'] == 'Check-in pendiente')
+    checkouts = sum(1 for r in reservas if r['estado'] == 'Check-out pendiente')
+
+    disponibles = sum(1 for h in habitaciones if h['estado'].lower() == 'disponible')
+    ocupadas = sum(1 for h in habitaciones if h['estado'].lower() == 'ocupada')
+    mantenimiento = sum(1 for h in habitaciones if h['estado'].lower() == 'mantenimiento')
+
+    return render_template("dashboard_admin.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento)
 
 
 
