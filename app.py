@@ -61,22 +61,39 @@ def login():
     _user = request.form['txtuser'].lower()
     _pass = request.form['txtpassword']
 
-    for credenciales in data:
-        if _user == credenciales["user"].lower():
-            if check_password_hash(credenciales["password"], _pass):
-                permiso = credenciales["permisos"]
-                if permiso == "cliente":
-                    return redirect(url_for('client'))
-                elif permiso == "empleado":
-                    return redirect(url_for('empleado'))
-                elif permiso == "admin":
-                    return redirect(url_for('admin'))
-            else:
-                flash("Contraseña incorrecta", "error")
-                return redirect(url_for('home'))
+    try:
+        usuario_encontrado = False
 
-    flash("Usuario no encontrado", "error")
-    return redirect(url_for('home'))
+        for credenciales in data:
+            if _user == credenciales["user"].lower():
+                usuario_encontrado = True
+                if check_password_hash(credenciales["password"], _pass):
+                    permiso = credenciales["permisos"]
+                    if permiso == "cliente":
+                        return redirect(url_for('client'))
+                    elif permiso == "empleado":
+                        return redirect(url_for('empleado'))
+                    elif permiso == "admin":
+                        return redirect(url_for('admin'))
+                    else:
+                        flash("Permiso no reconocido", "error")
+                        return redirect(url_for('home'))
+                else:
+                    flash("Contraseña incorrecta", "error")
+                    return redirect(url_for('home'))
+
+        if not usuario_encontrado:
+            flash("Usuario no encontrado", "error")
+            return redirect(url_for('home'))
+
+    except KeyError as e:
+        flash(f"Error en los datos del usuario: clave faltante {e}", "error")
+        return redirect(url_for('home'))
+
+    except Exception as e:
+        flash(f"Ocurrió un error inesperado: {str(e)}", "error")
+        return redirect(url_for('home'))
+
 
 
 @app.route('/registro', methods=['GET'])
@@ -88,20 +105,17 @@ def registro():
 def registrar_usuario():
     users_file = 'data/users.json'
 
-    # Crear archivo si no existe
     if not os.path.exists(users_file):
         with open(users_file, 'w', encoding='utf-8') as f:
             json.dump([], f, indent=4)
 
-    # Leer usuarios existentes
     with open(users_file, 'r', encoding='utf-8') as f:
         usuarios = json.load(f)
 
-    # Obtener datos del formulario
     user_input = request.form['user']
     email_input = request.form['email']
 
-    # Verificar si el usuario o el email ya existen
+
     for u in usuarios:
         if u['user'].lower() == user_input.lower():
             flash('Nombre de usuario ya registrado. Elegí otro.', 'error')
@@ -110,7 +124,7 @@ def registrar_usuario():
             flash('Correo electrónico ya registrado.', 'error')
             return redirect(url_for('registro'))
 
-    # Obtener el último ID usado
+
     ultimo_id = max((u.get("id", 0) for u in usuarios), default=-1)
     if request.form['password'] != request.form['confirm-password']:
         flash('La contraseña no coincide.', 'error')
