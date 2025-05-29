@@ -51,25 +51,18 @@
             </tr>
         </thead>
         <tbody>
+          {% for data in habitaciones %}
             <tr>
-              <td>102</td>
-              <td>Duna</td>
-              <td>Simple</td>
-              <td>Ocupada</td>
-              <td>116</td>
+              <td>{{ data.id }}</td>
+              <td>{{ data.hotel_id }}</td>
+              <td>{{ data.tipo }}</td>
+              <td>{{ data.estado }}</td>
+              <td>{{ data.n_reserva }}</td>
               <td><button><i class="fa-solid fa-circle-info"></i></button></td>
             </tr>
-            <tr>
-              <td>115</td>
-              <td>Marea Baja</td>
-              <td>Doble</td>
-              <td>Ocupada</td>
-              <td>16</td>
-              <td><button><i class="fa-solid fa-circle-info"></i></button></td>
-            </tr>
+          {% endfor %}
 
-        </tr>
-      </tbody>
+        </tbody>
     </table>
     </div>
 

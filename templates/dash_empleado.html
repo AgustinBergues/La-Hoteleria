@@ -33,7 +33,7 @@
   
   <!-- Header superior -->
   <header>
-    <div class="title">Dashboard Empleado</div>
+    <div class="title">Dashboard</div>
     <div class="notifications">🔔</div>
   </header>
 
@@ -55,14 +55,14 @@
         </div>
       </a>
 
-      <a href="{{ url_for('error') }}">
+      <a href="{{ url_for('habitaciones_info') }}">
         <div class="card">
             <h2>{{ ocupadas }}</h2>
             <p>Habitaciones Ocupadas</p>
         </div>
       </a>
 
-      <a href="{{ url_for('error') }}">
+      <a href="{{ url_for('habitaciones_info') }}">
         <div class="card">
           <h2>{{ disponibles }}</h2>
           <p>Habitaciones Disponibles</p>
@@ -108,7 +108,7 @@
         <div>Ocupadas: {{ ocupadas }}</div>
         <div>En mantenimiento: {{ mantenimiento }}</div>
       </div>
-      <button>Ir a Habitaciones</button>
+      <button onclick="location.href='{{ url_for('habitaciones_info') }}'">Ir a Habitaciones</button>
     </div>
 
 
