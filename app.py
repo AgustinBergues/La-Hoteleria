@@ -288,6 +288,19 @@ def admin():
     return render_template("dashboard_admin.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento)
 
 
+@app.route('/reserva_admin')
+def reservas_admin():
+    reservas = cargar_reservas()
+
+    return render_template("reservas_a.html", reservas=reservas)
+
+
+@app.route('/mantenimiento_admin')
+def mantenimiento_admin():
+    mantenimientos = cargar_mantenimientos()
+
+    return render_template("mantenimientos_a.html", mantenimientos=mantenimientos)
+
 
 
 @app.route('/error')
