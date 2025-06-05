@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
 <body>
 <nav>
   <div>
-    <div class="logo">🏨</div>
+    <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
     <ul>
       <li><a href="{{ url_for('empleado') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
       <li><a href="{{ url_for('checks') }}"><i class="fas fa-door-open"></i><span>Entradas/Salidas</span></a></li>

@@ -29,8 +29,23 @@ nav .logo {
   margin-bottom: .2rem;
   background-color: #1a252f;
   white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   
+}
+nav .logo img {
+  height: 60px;
+  width: 60px;
+  transition: all 0.3s ease;
+  margin: 10px auto;
+  display: block;
+}
+
+nav:hover .logo img {
+  height: 100px;
+  width: 120px;
 }
 nav ul {
   list-style: none;
@@ -70,6 +85,8 @@ nav:hover ul li span {
 nav .bottom-links {
   margin-bottom: 1rem;
 }
+
+
 
 
 header {
