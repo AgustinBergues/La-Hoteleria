@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/globals.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #3b82f6;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .usuario {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .info {
+      flex-grow: 1;
+    }
+
+    .info h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .info p {
+      margin: 0.2rem 0;
+      color: #555;
+    }
+
+    select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
+    <ul>
+      <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+      <li><a href="{{ url_for('error') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+      <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+      <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+      <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+      <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+      <li><a href="{{ url_for('error') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+    </ul>
+  </div>
+  <div class="bottom-links">
+    <ul>
+      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  <header>
+    <div class="title">Usuarios</div>
+    <div class="notifications">🔔</div>
+  </header>
+
+  <div class="container">
+    {% for user in usuarios %}
+    <div class="usuario">
+      <div class="info">
+        <h3>{{ user.nombre }} {{ user.apellido }}</h3>
+        <p>ID: {{ user.id }}</p>
+        <p>Usuario:{{ user.user }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Telefono: {{ user.telefono }}</p>
+        <p>Fecha de Nacimiento: {{ user.fecha_nacimiento }}</p>
+      </div>
+      <form method="POST" action="{{ url_for('usuarios_admin') }}">
+        <input type="hidden" name="id" value="{{ user.id }}">
+        <select name="permisos" onchange="this.form.submit()">
+          <option value="cliente" {% if user.permisos == 'cliente' %}selected{% endif %}>Cliente</option>
+          <option value="empleado" {% if user.permisos == 'empleado' %}selected{% endif %}>Empleado</option>
+          <option value="admin" {% if user.permisos == 'admin' %}selected{% endif %}>Admin</option>
+        </select>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</body>
+</html>

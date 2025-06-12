@@ -307,6 +307,46 @@ def mantenimiento_admin():
 def error():
     return render_template("error_page.html")
 
+@app.route('/habitaciones_admin', methods=['GET', 'POST'])
+def habitaciones_admin():
+    with open('data/habitaciones.json', 'r') as f:
+        habitaciones = json.load(f)
+
+    if request.method == 'POST':
+        id_eliminar = int(request.form['id'])
+        hotel_id_eliminar = int(request.form['hotel_id'])
+        habitaciones = [h for h in habitaciones if not (h['id'] == id_eliminar and h['hotel_id'] == hotel_id_eliminar)]
+
+        with open('data/habitaciones.json', 'w') as f:
+            json.dump(habitaciones, f, indent=2)
+
+        return redirect(url_for('habitaciones_admin'))
+
+    return render_template('habitaciones_a.html', habitaciones=habitaciones)
+
+@app.route('/usuarios_admin', methods=['GET', 'POST'])
+def usuarios_admin():
+    users_file = 'data/users.json'
+
+    with open(users_file, 'r', encoding='utf-8') as f:
+        usuarios = json.load(f)
+
+    if request.method == 'POST':
+        user_id = int(request.form['id'])
+        nuevo_permiso = request.form['permisos']
+
+        for u in usuarios:
+            if u['id'] == user_id:
+                u['permisos'] = nuevo_permiso
+                break
+
+        with open(users_file, 'w', encoding='utf-8') as f:
+            json.dump(usuarios, f, indent=4, ensure_ascii=False)
+
+    return render_template('usuarios_a.html', usuarios=usuarios)
+
+
+
 
 
 

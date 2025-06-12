@@ -30,7 +30,7 @@
         "email": "bautistavillalbs@gmail.com",
         "password": "scrypt:32768:8:1$BlyrDHrs2GbdwYCj$38ff1b183f43dbd1e276367b29f7a22a5276036b0f5fc9a145b70c53e6853a66b6844d01c663b222f358b93d10a7cb8a581181453e8729321f473698bbe3a98c",
         "fecha_nacimiento": "2005-10-03",
-        "permisos": "empleado"
+        "permisos": "admin"
     },
     {
         "id": 3,
