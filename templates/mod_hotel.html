@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Hoteles</title>
+    <link rel="stylesheet" href="../static/globals.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        img { max-width: 100px; height: auto; }
+
+        .boton_contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .boton_hotel {
+            width: 200px;
+            height: 35px;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- Barra lateral -->
+  <nav>
+    <div>
+      <div class="logo">
+        <img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo">
+      </div>
+      <ul>
+        <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+        <li><a href="{{ url_for('hoteles_admin') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+        <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+        <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+        <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+        <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+        <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+      </ul>
+    </div>
+    <div class="bottom-links">
+      <ul>
+        <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="main-content">
+
+    <!-- Header superior -->
+    <header>
+      <div class="title">Reportes</div>
+      <div class="notifications">🔔</div>
+    </header>
+
+    <div class="boton_contenedor">
+        <a href="/nuevo_hotel">
+            <button class="boton_hotel">Agregar Hotel Nuevo</button>
+        </a>
+    </div>
+
+
+      <table>
+          <thead>
+              <tr>
+                  <th>Portada</th>
+                  <th>Nombre</th>
+                  <th>Precios</th>
+                  <th>Visitas</th>
+                  <th>Acciones</th>
+              </tr>
+          </thead>
+          <tbody id="tabla-hoteles">
+              {% for hotel in hoteles %}
+              <tr>
+                  <td><img src="{{ url_for('static', filename=hotel.portada.replace('static/', '')) }}" alt="Portada"></td>
+                  <td>{{ hotel.hotel }}</td>
+                  <td>
+                      Simple: ${{ hotel.precios.Simple }}<br>
+                      Doble: ${{ hotel.precios.Doble }}<br>
+                      Suite: ${{ hotel.precios.Suite }}
+                  </td>
+                  <td>{{ hotel.visitas }}</td>
+                  <td>
+                      <button onclick="editarHotel({{ hotel | tojson }})">Editar</button>
+                      <form method="POST" action="/eliminar_hotel" style="display:inline;" onsubmit="return confirmarEliminacion()">
+                          <input type="hidden" name="id" value="{{ hotel.id }}">
+                          <button type="submit">Eliminar</button>
+                      </form>
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+
+
+    <script>
+        function mostrarFormulario() {
+            document.getElementById("formulario-hotel").style.display = "block";
+            document.getElementById("form-title").innerText = "Nuevo Hotel";
+        }
+
+        function editarHotel(hotel) {
+            document.getElementById("formulario-hotel").style.display = "block";
+            document.getElementById("form-title").innerText = "Editar Hotel";
+            document.getElementById("hotel-id").value = hotel.id;
+            document.getElementById("hotel-nombre").value = hotel.hotel;
+            document.getElementById("precio-simple").value = hotel.precios.Simple;
+            document.getElementById("precio-doble").value = hotel.precios.Doble;
+            document.getElementById("precio-suite").value = hotel.precios.Suite;
+        }
+
+        function confirmarEliminacion() {
+            return confirm("¿Estás seguro que querés borrarlo de forma permanente?");
+        }
+    </script>
+</body>
+</html>

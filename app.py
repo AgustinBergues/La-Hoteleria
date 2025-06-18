@@ -5,6 +5,7 @@ from flask import jsonify
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = '8273645912037485'  # Necesaria para usar flash
@@ -287,6 +288,121 @@ def admin():
     mantenimiento = sum(1 for h in habitaciones if h['estado'].lower() == 'mantenimiento')
 
     return render_template("dashboard_admin.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento)
+
+
+
+
+@app.route('/hoteles_admin')
+def hoteles_admin():
+    hoteles = cargar_hoteles()
+    return render_template('mod_hotel.html', hoteles=hoteles)
+
+@app.route('/guardar_hotel', methods=['POST'])
+def guardar_hotel():
+    hoteles = cargar_hoteles()
+    nuevo_id = max((h['id'] for h in hoteles), default=-1) + 1
+    nombre = request.form['hotel']
+    simple = int(request.form['simple'])
+    doble = int(request.form['doble'])
+    suite = int(request.form['suite'])
+
+    if request.form['hotel']:  # Editar hotel existente
+        hotel_id = int(nuevo_id)
+        for hotel in hoteles:
+            if hotel['id'] == hotel_id:
+                hotel['hotel'] = nombre
+                hotel['precios'] = {"Simple": simple, "Doble": doble, "Suite": suite}
+                if 'portada' in request.files:
+                    archivo = request.files['portada']
+                    if archivo.filename:
+                        filename = secure_filename(archivo.filename)
+                        archivo.save(os.path.join('static/img/', filename))
+                        hotel['portada'] = f"static/img/{filename}"
+                break
+    else:  # Crear nuevo hotel
+        nuevo_id = max((h['id'] for h in hoteles), default=-1) + 1
+        archivo = request.files['portada']
+        filename = secure_filename(archivo.filename)
+        archivo.save(os.path.join('static/img/', filename))
+        nuevo_hotel = {
+            "id": nuevo_id,
+            "hotel": nombre,
+            "portada": f"static/img/{filename}",
+            "habitaciones": [],
+            "baño": "",
+            "extras": [],
+            "visitas": 0,
+            "google_maps_url": "",
+            "precios": {"Simple": simple, "Doble": doble, "Suite": suite}
+        }
+        hoteles.append(nuevo_hotel)
+
+
+    guardar_hoteles(hoteles)
+    return redirect(url_for('hoteles_admin'))
+
+
+@app.route('/eliminar_hotel', methods=['POST'])
+def eliminar_hotel():
+    hotel_id = int(request.form['id'])
+    hoteles = cargar_hoteles()
+    hoteles = [h for h in hoteles if h['id'] != hotel_id]
+    guardar_hoteles(hoteles)
+    return redirect(url_for('hoteles_admin'))
+
+@app.route('/nuevo_hotel')
+def nuevo_hotel():
+    return render_template('agregar_hotel.html')
+
+@app.route('/guardar_hotel_nuevo', methods=['POST'])
+def guardar_hotel_nuevo():
+    hoteles = cargar_hoteles()
+    nuevo_id = max((h['id'] for h in hoteles), default=-1) + 1
+
+    nombre = request.form['hotel']
+    maps = request.form['google_maps_url']
+    simple = int(request.form['simple'])
+    doble = int(request.form['doble'])
+    suite = int(request.form['suite'])
+
+    def guardar_imagen(campo):
+        archivo = request.files.get(campo)
+        if archivo and archivo.filename:
+            filename = secure_filename(archivo.filename)
+            ruta = f"static/img/{filename}"
+            archivo.save(ruta)
+            return ruta
+        return ""
+
+    nuevo_hotel = {
+        "id": nuevo_id,
+        "hotel": nombre,
+        "portada": guardar_imagen('portada'),
+        "habitaciones": [
+            guardar_imagen('habitacion1'),
+            guardar_imagen('habitacion2')
+        ],
+        "baño": guardar_imagen('baño'),
+        "extras": [
+            guardar_imagen('extra1'),
+            guardar_imagen('extra2')
+        ],
+        "visitas": 0,
+        "google_maps_url": maps,
+        "precios": {
+            "Simple": simple,
+            "Doble": doble,
+            "Suite": suite
+        }
+    }
+
+    hoteles.append(nuevo_hotel)
+    guardar_hoteles(hoteles)
+
+    return redirect(url_for('hoteles_admin'))
+
+
+
 
 
 @app.route('/reserva_admin')
