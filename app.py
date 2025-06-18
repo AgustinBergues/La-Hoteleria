@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
 import json
 import os
+from flask import jsonify
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
@@ -345,8 +346,38 @@ def usuarios_admin():
 
     return render_template('usuarios_a.html', usuarios=usuarios)
 
+@app.route('/reportes')
+def ver_quejas():
+    with open('data/reportes.json', 'r', encoding='utf-8') as f:
+        reportes = json.load(f)
+    return render_template('reportes_a.html', reportes=reportes)
+@app.route('/actualizar_reporte', methods=['POST'])
+def actualizar_reporte():
+    try:
+        data = request.get_json()
+        indice = data.get('indice')
 
+        with open('data/reportes.json', 'r', encoding='utf-8') as f:
+            reportes = json.load(f)
 
+        if indice is None or not (0 <= indice < len(reportes)):
+            return jsonify({'error': 'Índice inválido'}), 400
+
+        if data.get('eliminar'):
+            # Eliminar el reporte
+            reportes.pop(indice)
+        else:
+            # Actualizar el reporte
+            reportes[indice]['respuesta'] = data.get('respuesta', '')
+            reportes[indice]['estado'] = data.get('estado', reportes[indice].get('estado', 'pendiente'))
+
+        with open('data/reportes.json', 'w', encoding='utf-8') as f:
+            json.dump(reportes, f, indent=4, ensure_ascii=False)
+
+        return jsonify({'success': True})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 

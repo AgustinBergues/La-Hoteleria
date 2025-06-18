@@ -1,11 +1,261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportes</title>
+  <meta charset="UTF-8">
+  <title>Reportes</title>
+    <link rel="stylesheet" href="../static/globals.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a2d9a66f4f.js" crossorigin="anonymous"></script>
+  <style>
+    /* Estilo específico del carrusel */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .carrusel {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .queja {
+      min-height: 100px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      white-space: pre-line;
+      color: #333;
+    }
+    .empleado {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .respuesta {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      resize: vertical;
+      font-size: 14px;
+    }
+
+    .acciones button {
+      margin: 5px 5px 0 0;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .acciones .responder {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .acciones .aceptar {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .acciones .rechazar {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .acciones .borrar {
+      background-color: #9b59b6;
+      color: white;
+    }
+
+    .acciones button:hover {
+      opacity: 0.9;
+    }
+
+    .carrusel-control {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .carrusel-control button {
+      margin: 0 5px;
+      padding: 8px 14px;
+      border-radius: 5px;
+      background: #ddd;
+      color: #333;
+      border: 1px solid #bbb;
+      cursor: pointer;
+    }
+
+    .carrusel-control button:hover {
+      background: #ccc;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Barra lateral -->
+  <nav>
+    <div>
+      <div class="logo">
+        <img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo">
+      </div>
+      <ul>
+        <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+        <li><a href="{{ url_for('error') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+        <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+        <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+        <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+        <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+        <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+      </ul>
+    </div>
+    <div class="bottom-links">
+      <ul>
+        <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
     
+    <!-- Header superior -->
+    <header>
+      <div class="title">Reportes</div>
+      <div class="notifications">🔔</div>
+    </header>
+
+    <!-- Carrusel de Quejas -->
+    <div class="carrusel" id="carrusel">
+      <div class="empleado" id="empleadoNombre">Empleado: Cargando...</div>
+      <div class="queja" id="quejaTexto">Cargando...</div>
+
+      <textarea class="respuesta" id="respuesta" placeholder="Escribe tu respuesta..."></textarea>
+
+      <div class="acciones">
+        <button class="responder" onclick="responder()">Responder</button>
+        <button class="aceptar" onclick="aceptar()">Aceptar</button>
+        <button class="rechazar" onclick="rechazar()">Rechazar</button>
+        <button class="borrar" onclick="borrar()">Eliminar</button>
+      </div>
+
+      <div class="carrusel-control">
+        <button onclick="anterior()">Anterior</button>
+        <button onclick="siguiente()">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let quejas = {{ reportes | tojson | safe }};
+    let indice = 0;
+
+
+    function mostrarQueja() {
+      const queja = quejas[indice];
+      if (queja) {
+        document.getElementById("quejaTexto").innerText =
+          queja.texto + "\n\nEstado: " + queja.estado;
+        document.getElementById("respuesta").value = queja.respuesta || '';
+        document.getElementById("empleadoNombre").innerText = "Empleado: " + (queja.empleado || 'No especificado');
+      } else {
+        document.getElementById("quejaTexto").innerText = "No hay más quejas.";
+        document.getElementById("respuesta").value = "";
+        document.getElementById("empleadoNombre").innerText = "";
+      }
+    }
+
+    function responder() {
+      const respuesta = document.getElementById("respuesta").value.trim();
+      if (!respuesta) return alert("Escribí una respuesta primero.");
+
+      quejas[indice].respuesta = respuesta;
+
+      guardarCambios(quejas[indice].estado);
+    }
+
+    function aceptar() {
+      quejas[indice].estado = "aceptada";
+      responder(); // esto también guarda
+    }
+
+    function rechazar() {
+      quejas[indice].estado = "rechazada";
+      responder(); // esto también guarda
+    }
+
+    function borrar() {
+      if (confirm("¿Seguro que querés eliminar esta queja?")) {
+        quejas.splice(indice, 1);
+
+        fetch('/actualizar_reporte', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ indice: indice, eliminar: true })  // opcional si querés implementar borrado
+        });
+
+        if (indice >= quejas.length) indice = quejas.length - 1;
+        mostrarQueja();
+      }
+    }
+
+    function siguiente() {
+      if (indice < quejas.length - 1) {
+        indice++;
+        mostrarQueja();
+      }
+    }
+
+    function anterior() {
+      if (indice > 0) {
+        indice--;
+        mostrarQueja();
+      }
+    }
+
+    function guardarCambios(estado) {
+      const respuesta = document.getElementById("respuesta").value.trim();
+
+      fetch('/actualizar_reporte', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          indice: indice,
+          respuesta: respuesta,
+          estado: estado
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          alert("Cambios guardados.");
+          mostrarQueja();
+        } else {
+          alert("Error al guardar: " + data.error);
+        }
+      })
+      .catch(err => alert("Error de red: " + err));
+    }
+
+
+
+    // Inicializar
+    mostrarQueja();
+  </script>
+
 </body>
 </html>
