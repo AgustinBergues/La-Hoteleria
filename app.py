@@ -494,6 +494,26 @@ def actualizar_reporte():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/habitaciones_matriz')
+def habitaciones_matriz():
+    habitaciones = cargar_habitaciones()
+    hoteles = cargar_hoteles()
+
+    # Agrupar por hotel_id
+    hoteles_dict = {h["id"]: h["hotel"] for h in hoteles}
+    matriz = {}
+
+    for h in habitaciones:
+        hotel_nombre = hoteles_dict.get(h["hotel_id"], "Desconocido")
+        if hotel_nombre not in matriz:
+            matriz[hotel_nombre] = []
+        matriz[hotel_nombre].append(h)
+
+    
+    return render_template("habitaciones_matriz.html",  matriz=matriz, )
+
 
 
 
