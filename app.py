@@ -57,25 +57,29 @@ def home():
 
 
 
+from flask import session  # Agregalo al import
+
 @app.route('/form-login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+
     data = load_users()
     _user = request.form['txtuser'].lower()
     _pass = request.form['txtpassword']
 
     try:
-        usuario_encontrado = False
-
         for credenciales in data:
             if _user == credenciales["user"].lower():
-                usuario_encontrado = True
                 if check_password_hash(credenciales["password"], _pass):
-                    permiso = credenciales["permisos"]
-                    if permiso == "cliente":
+                    session['user'] = credenciales["user"]  # Guardar en sesión
+                    session['permiso'] = credenciales["permisos"]
+                    
+                    if credenciales["permisos"] == "cliente":
                         return redirect(url_for('client'))
-                    elif permiso == "empleado":
+                    elif credenciales["permisos"] == "empleado":
                         return redirect(url_for('empleado'))
-                    elif permiso == "admin":
+                    elif credenciales["permisos"] == "admin":
                         return redirect(url_for('admin'))
                     else:
                         flash("Permiso no reconocido", "error")
@@ -84,17 +88,13 @@ def login():
                     flash("Contraseña incorrecta", "error")
                     return redirect(url_for('home'))
 
-        if not usuario_encontrado:
-            flash("Usuario no encontrado", "error")
-            return redirect(url_for('home'))
-
-    except KeyError as e:
-        flash(f"Error en los datos del usuario: clave faltante {e}", "error")
+        flash("Usuario no encontrado", "error")
         return redirect(url_for('home'))
 
     except Exception as e:
-        flash(f"Ocurrió un error inesperado: {str(e)}", "error")
+        flash(f"Ocurrió un error: {str(e)}", "error")
         return redirect(url_for('home'))
+
 
 
 
@@ -500,8 +500,17 @@ def actualizar_reporte():
 def habitaciones_matriz():
     habitaciones = cargar_habitaciones()
     hoteles = cargar_hoteles()
+    reservas = cargar_reservas()
 
-    # Agrupar por hotel_id
+    # Crear un diccionario para encontrar huésped por habitación
+    reserva_info = {}
+    for r in reservas:
+        if r['estado'].lower() != 'cancelada':
+            reserva_info[r['habitacion_n']] = {
+                'huesped': r['huesped'],
+                'celular': r['celular']
+            }
+
     hoteles_dict = {h["id"]: h["hotel"] for h in hoteles}
     matriz = {}
 
@@ -509,10 +518,30 @@ def habitaciones_matriz():
         hotel_nombre = hoteles_dict.get(h["hotel_id"], "Desconocido")
         if hotel_nombre not in matriz:
             matriz[hotel_nombre] = []
+        # Agregar datos si hay reserva
+        info = reserva_info.get(h["id"], {})
+        h['huesped'] = info.get('huesped', 'N/A')
+        h['celular'] = info.get('celular', 'N/A')
         matriz[hotel_nombre].append(h)
 
+    return render_template("habitaciones_matriz.html", matriz=matriz)
+
+
+
+
+@app.route('/micuenta')
+def micuenta():
+    if 'user' not in session:
+        return redirect(url_for('home'))
     
-    return render_template("habitaciones_matriz.html",  matriz=matriz, )
+    usuarios = load_users()
+    usuario = next((u for u in usuarios if u["user"] == session["user"]), None)
+
+    if not usuario:
+        return redirect(url_for('home'))  # Por seguridad
+
+    return render_template('micuenta.html', usuario=usuario)
+
 
 
 

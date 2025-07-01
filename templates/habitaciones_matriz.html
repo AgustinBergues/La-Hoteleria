@@ -171,7 +171,7 @@
       <h2>{{ hotel }}</h2>
       <div class="grid">
         {% for h in habitaciones %}
-          <button class="room {{ h.estado | lower }}" data-id="{{ h.id }}" data-estado="{{ h.estado }}">
+          <button class="room {{ h.estado | lower }}" data-id="{{ h.id }}" data-estado="{{ h.estado }}" data-nombre="{{ h.huesped }}" data-telefono="{{ h.celular }}">
             {{ h.id }}
           </button>
         {% endfor %}
@@ -185,6 +185,8 @@
       <span class="close">&times;</span>
       <h2>Habitación <span id="modal-id"></span></h2>
       <p><strong>Estado:</strong> <span id="modal-estado"></span></p>
+      <p><strong>Huésped:</strong> <span id="modal-nombre"></span></p>
+      <p><strong>Teléfono:</strong> <span id="modal-telefono"></span></p>
     </div>
   </div>
 
@@ -193,15 +195,16 @@
     const modal = document.getElementById('modal');
     const modalId = document.getElementById('modal-id');
     const modalEstado = document.getElementById('modal-estado');
+    const modalNombre = document.getElementById('modal-nombre');
+    const modalTelefono = document.getElementById('modal-telefono');
     const closeBtn = document.querySelector('.close');
 
     document.querySelectorAll('.room').forEach(button => {
       button.addEventListener('click', () => {
-        const id = button.dataset.id;
-        const estado = button.dataset.estado;
-
-        modalId.textContent = id;
-        modalEstado.textContent = estado;
+        modalId.textContent = button.dataset.id;
+        modalEstado.textContent = button.dataset.estado;
+        modalNombre.textContent = button.dataset.nombre || 'N/A';
+        modalTelefono.textContent = button.dataset.telefono || 'N/A';
         modal.classList.remove('hidden');
       });
     });

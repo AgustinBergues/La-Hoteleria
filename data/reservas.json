@@ -6,7 +6,7 @@
     "habitacion_n": 101,
     "tipo": "Simple",
     "fecha": "26-04-2025",
-    "celular": "", 
+    "celular": "0928701234", 
     "checkin": "20/01/2025",
     "checkout": "15/05/2025",
     "estado": "Check-in pendiente"
@@ -18,7 +18,7 @@
     "habitacion_n": 110,
     "tipo": "Doble",
     "fecha": "05-05-2025",
-    "celular": "", 
+    "celular": "0918345678", 
     "checkin": "15/04/2025",
     "checkout": "20/04/2025",
     "estado": "finalizado"
@@ -30,7 +30,7 @@
     "habitacion_n": 125,
     "tipo": "Swite",
     "fecha": "25-05-2025",
-    "celular": "", 
+    "celular": "1123456789", 
     "checkin": "10/03/2025",
     "checkout": "17/03/2025",
     "estado": "Check-out pendiente"
@@ -42,7 +42,7 @@
     "habitacion_n": 104,
     "tipo": "Simple",
     "fecha": "30-05-2025",
-    "celular": "", 
+    "celular": "0911234567", 
     "checkin": "05/05/2025",
     "checkout": "12/05/2025",
     "estado": "Check-in pendiente"
@@ -54,7 +54,7 @@
     "habitacion_n": 119,
     "tipo": "Doble",
     "fecha": "02-06-2025",
-    "celular": "", 
+    "celular": "1156848903", 
     "checkin": "01/06/2025",
     "checkout": "08/06/2025",
     "estado": "Check-in pendiente"
