@@ -1,0 +1,170 @@
+[
+    {
+        "id": 0,
+        "hotel": "Hotel Aurora",
+        "portada": "static/img/Hotel Aurora.webp",
+        "habitaciones": [
+            "static/img/Habitacion Aurora.jpeg",
+            "static/img/Habitacion 2 Aurora.jpeg"
+        ],
+        "baño": "static/img/Baño Aurora.jpeg",
+        "extras": [
+            "static/img/extra Aurora.jpeg",
+            "static/img/Living Aurora.jpeg"
+        ],
+        "visitas": 6,
+        "google_maps_url": "https://www.google.com.ar/maps/place/B%26B+HOTEL+Roma+Italia+Viminale/@41.8996754,12.4881238,17z/data=!4m10!3m9!1s0x132f61af0635b071:0xd9d11a116660747f!5m3!1s2025-04-29!4m1!1i2!8m2!3d41.8996755!4d12.4929947!16s%2Fg%2F1twt3t6v?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D",
+        "precios": {
+            "Simple": 50,
+            "Doble": 80,
+            "Suite": 120
+        }
+    },
+    {
+        "id": 1,
+        "hotel": "Hotel Duna",
+        "portada": "static/img/Hotel Duna.webp",
+        "habitaciones": [
+            "static/img/habitacion DUNA.jpeg",
+            "static/img/Habitacion 2 Duna.jpg"
+        ],
+        "baño": "static/img/Baño Duna.jpeg",
+        "extras": [
+            "static/img/extra Duna.jpg",
+            "static/img/Living Duna.webp"
+        ],
+        "visitas": 0,
+        "google_maps_url": "https://www.google.com/maps/place/Palazzo+Tirso+Cagliari+Mgallery/@39.2113014,9.1135527,17z/data=!4m9!3m8!1s0x12e7330e380c2b4f:0x63979bff279fc75f!5m2!4m1!1i2!8m2!3d39.2113014!4d9.1161276!16s%2Fg%2F11f5q89450?entry=ttu&g_ep=EgoyMDI1MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "precios": {
+            "Simple": 55,
+            "Doble": 85,
+            "Suite": 130
+        }
+    },
+    {
+        "id": 2,
+        "hotel": "Hotel Luna",
+        "portada": "static/img/Hotel Luna.webp",
+        "habitaciones": [
+            "static/img/Habitacion Luna.jpg",
+            "static/img/Habitacion 2 Luna.jpg"
+        ],
+        "baño": "static/img/Baño Luna.jpg",
+        "extras": [
+            "static/img/extra Luna.jpg",
+            "static/img/Living Luna.jpg"
+        ],
+        "visitas": 1,
+        "google_maps_url": "https://www.google.com/maps/place/Via+Domenico+Alberto+Azuni,+102%2F1,+09124+Cagliari+CA,+Italia/@39.2185957,9.1118689,17z/data=!3m1!4b1!4m5!3m4!1s0x12e73405f2515ceb:0xffe5f4d73b8f539!8m2!3d39.2185957!4d9.1118689?entry=ttu&g_ep=EgoyMDI1MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "precios": {
+            "Simple": 45,
+            "Doble": 75,
+            "Suite": 110
+        }
+    },
+    {
+        "id": 3,
+        "hotel": "Hotel Marea Baja",
+        "portada": "static/img/Marea Baja.webp",
+        "habitaciones": [
+            "static/img/habitacion MareaBaja.jpg",
+            "static/img/Habitacion 2 MareaBaja.jpg"
+        ],
+        "baño": "static/img/Baño MareaBaja.jpg",
+        "extras": [
+            "static/img/extra MareaBaja.jpg",
+            "static/img/Living MareaBaja.jpg"
+        ],
+        "visitas": 0,
+        "google_maps_url": "https://www.google.com/maps/place/Palazzo+Doglio/data=!4m2!3m1!1s0x0:0xe7882a7e8d11b539?sa=X&ved=1t:2428&ictx=111",
+        "precios": {
+            "Simple": 40,
+            "Doble": 70,
+            "Suite": 100
+        }
+    },
+    {
+        "id": 4,
+        "hotel": "Hotel Mercurio",
+        "portada": "static/img/Hotel Mercurio.webp",
+        "habitaciones": [
+            "static/img/Habitacion Mercurio.jpg",
+            "static/img/Habitacion 2 Mercurio.jpg"
+        ],
+        "baño": "static/img/Baño Mercurio.jpg",
+        "extras": [
+            "static/img/extra Mercurio.jpg",
+            "static/img/Living Mercurio.jpg"
+        ],
+        "visitas": 4,
+        "google_maps_url": "https://www.google.com/maps/place/Locanda+del+Buongustaio+Guest+House/@39.2135567,9.1137883,21z/data=!3m1!5s0x12e7340841ab39b1:0xa798ad46dcdd982a!4m10!3m9!1s0x12e73570b347ba57:0xcf2fc6a1eda6a283!5m3!1s2025-04-29!4m1!1i2!8m2!3d39.2136154!4d9.1138767!16s%2Fg%2F11v9jx_7rm?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D",
+        "precios": {
+            "Simple": 60,
+            "Doble": 90,
+            "Suite": 140
+        }
+    },
+    {
+        "id": 5,
+        "hotel": "Hotel Paraíso",
+        "portada": "static/img/Hotel Paraíso.webp",
+        "habitaciones": [
+            "static/img/Habitacion Paraíso.jpg",
+            "static/img/Habitacion 2 Paraíso.jpg"
+        ],
+        "baño": "static/img/Baño Paraíso.jpg",
+        "extras": [
+            "static/img/extra Paraíso.jpg",
+            "static/img/extra 2 Paraíso.jpg"
+        ],
+        "visitas": 7,
+        "google_maps_url": "https://www.google.com/maps/place/Via+dei+Giudicati,+66,+09131+Cagliari+CA,+Italia/@39.2290356,9.1211639,17z/data=!3m1!4b1!4m6!3m5!1s0x12e7346b2c684a55:0xd6734fbce580dc77!8m2!3d39.2290356!4d9.1237388!16s%2Fg%2F11c2chw8v7?hl=es&entry=ttu&g_ep=EgoyMDI1MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "precios": {
+            "Simple": 65,
+            "Doble": 95,
+            "Suite": 150
+        }
+    },
+    {
+        "id": 6,
+        "hotel": "Hotel Shelter",
+        "portada": "static/img/Shelter Hotel.webp",
+        "habitaciones": [
+            "static/img/Habitacion Shelter.jpg",
+            "static/img/Habitacion 2 Shelter.jpg"
+        ],
+        "baño": "static/img/Baño Shelter.jpg",
+        "extras": [
+            "static/img/extra Shelter.jpg",
+            "static/img/Living Shelter.jpg"
+        ],
+        "visitas": 1,
+        "google_maps_url": "https://www.google.com/maps/place/Via+Monsignor+Giuseppe+Melas,+14,+08100+Nuoro+NU,+Italia/@40.3179851,9.3327225,3a,75y,204.14h,112.86t/data=!3m7!1e1!3m5!1safkHssD46kBaMv3CmNSIQQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22.860456702857547%26panoid%3DafkHssD46kBaMv3CmNSIQQ%26yaw%3D204.13997274446695!7i16384!8i8192!4m6!3m5!1s0x12de865d68293acb:0xc0456274595cc8fb!8m2!3d40.3177714!4d9.3326103!16s%2Fg%2F11q2nbyv31?hl=es&entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D",
+        "precios": {
+            "Simple": 50,
+            "Doble": 80,
+            "Suite": 120
+        }
+    },
+    {
+        "id": 7,
+        "hotel": "Hotel Sunset",
+        "portada": "static/img/Hotel Sunset.webp",
+        "habitaciones": [
+            "static/img/Habitacion Sunset.jpg",
+            "static/img/Habitacion 2 Sunset.jpg"
+        ],
+        "baño": "static/img/Baño Sunset.jpg",
+        "extras": [
+            "static/img/extra Sunset.jpg",
+            "static/img/Living Sunset.jpg"
+        ],
+        "visitas": 0,
+        "google_maps_url": "https://www.google.com/maps/place/HTL+9+de+Julio+Buenos+Aires/@-34.6133917,-58.3859366,15.17z/data=!4m19!1m8!3m7!1s0x95bccad033b79eef:0x70ca2325e70c0ce7!2sCarlos+Pellegrini+37,+C1009ABA+Cdad.+Aut%C3%B3noma+de+Buenos+Aires!3b1!8m2!3d-34.6079332!4d-58.3805045!16s%2Fg%2F11rg68w2b8!3m9!1s0x95bccad0917d8501:0x8536df39b29b0204!5m3!1s2025-04-29!4m1!1i2!8m2!3d-34.6108929!4d-58.3821885!16s%2Fg%2F11b6wmt7_t?hl=es&entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D",
+        "precios": {
+            "Simple": 55,
+            "Doble": 85,
+            "Suite": 130
+        }
+    }
+]

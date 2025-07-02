@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/globals.css">
+    <link rel="stylesheet" href="../static/habitaciones_e.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Habitaciones</title>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
+    <ul>
+      <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+        <li><a href="{{ url_for('hoteles_admin') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+        <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+        <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+        <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+        <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+        <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+    </ul>
+  </div>
+  <div class="bottom-links">
+    <ul>
+      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+    </ul>
+  </div>
+</nav>   
+
+<!-- Contenido principal -->
+<div class="main-content">
+
+  <!-- Header superior -->
+  <header>
+    <div class="title">Habitaciones</div>
+    <div class="notifications">🔔</div>
+  </header>
+
+  <div class="container">
+
+    <table>
+        <thead>
+            <tr>
+              <th>Habitacion</th>
+              <th>Hotel</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>N° Reserva</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for data in habitaciones %}
+            <tr>
+              <td>{{ data.id }}</td>
+              <td>{{ data.hotel_id }}</td>
+              <td>{{ data.tipo }}</td>
+              <td>{{ data.estado }}</td>
+              <td>{{ data.n_reserva }}</td>
+              <td>
+                <button><i class="fa-solid fa-circle-info"></i></button>
+                <form method="POST" action="{{ url_for('habitaciones_admin') }}">
+                  <input type="hidden" name="id" value="{{ data.id }}">
+                  <input type="hidden" name="hotel_id" value="{{ data.hotel_id }}">
+                  <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+    </table>
+    </div>
+
+</div>
+
+</body>
+</html>

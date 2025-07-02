@@ -1,0 +1,46 @@
+[
+    {
+        "id": 0,
+        "user": "cliente",
+        "nombre": "Agustin",
+        "apellido": "Bergues",
+        "telefono": "123456789",
+        "email": "ejemplo@gmail.com",
+        "password": "scrypt:32768:8:1$DRgdOIdAg2d5uEP4$3fa4fe73c748cc1bfe26a864e350553b7ce5e6fe444217cf9918cf891b1b9c233a13c549714ac680a14dc961e0dacd651f55fd1abb3860649a062068d20e5113",
+        "fecha_nacimiento": "2004-12-20",
+        "permisos": "admin"
+    },
+    {
+        "id": 1,
+        "user": "nacho",
+        "nombre": "Ignacio ",
+        "apellido": "Rodriguez gilligan",
+        "telefono": "01123560039",
+        "email": "Nachorg0705@gmail.com",
+        "password": "scrypt:32768:8:1$aTOzU43aizCYQDtk$66460f95f1d0c54abd2e2f303967e9f2a729f0756b36bebcd5860331759bec559ee407a8c7dfb16b6a657928f7e5f1d2bf6009618a0e7c9c1a28f31e6a9c4045",
+        "fecha_nacimiento": "2005-07-13",
+        "permisos": "admin"
+    },
+    {
+        "id": 2,
+        "user": "bauti",
+        "nombre": "bautista",
+        "apellido": "Villalba",
+        "telefono": "1167649008",
+        "email": "bautistavillalbs@gmail.com",
+        "password": "scrypt:32768:8:1$BlyrDHrs2GbdwYCj$38ff1b183f43dbd1e276367b29f7a22a5276036b0f5fc9a145b70c53e6853a66b6844d01c663b222f358b93d10a7cb8a581181453e8729321f473698bbe3a98c",
+        "fecha_nacimiento": "2005-10-03",
+        "permisos": "admin"
+    },
+    {
+        "id": 3,
+        "user": "tobias",
+        "nombre": "Tobias",
+        "apellido": "Millan",
+        "telefono": "2954239772",
+        "email": "Tobiasmilllangonzalez@gmail.com",
+        "password": "scrypt:32768:8:1$fkTa9RNanQ73NWTI$349aa596505c2cda55a1eb48d5f2780b81789e1bdd413f9219e8ede62bfb61393531e14acb3e52b0bd20157c1c51fb5283e15924fd9f8109a341d80a15b00ad4",
+        "fecha_nacimiento": "2005-02-04",
+        "permisos": "cliente"
+    }
+]

@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  margin-left: 60px; /* 👈 IMPORTANTE: solo dejamos espacio para el nav cerrado */
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s;
+}
+
+.container {
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+th, td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background-color: #f0f0f0;
+}

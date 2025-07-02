@@ -1,0 +1,63 @@
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 16px;
+}
+
+:root {
+    --principal: #fff;
+    --secundario: #000;
+}
+
+/*                 HABITACIONES PAGE                 */
+
+.titulo {
+    text-align: center;
+
+}
+
+.contenedor {
+    width: 120rem;
+    margin: 0 auto;
+}
+
+.nav-bg {
+    background: var(--secundario);
+}
+
+.navegacion-principal {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navegacion-principal a {
+    color: var(--principal);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 1rem;
+
+}
+
+.navegacion-principal a:hover {
+    background: #007BFF;
+    color: black;
+
+}
+
+/*                 SERVICIOS PAGE                 */
+
+
+
+
+
+
+/*                 GALERIA PAGE                 */
+
+
+
+
+
+
+
+/*                 MI CUENTA PAGE                 */

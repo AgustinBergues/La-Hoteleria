@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/globals.css">
+  <link rel="stylesheet" href="css/checks.css">
+  <title>Gestión de Entradas y Salidas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Barra lateral -->
+<nav>
+  <div>
+    <div class="logo">🏨</div>
+    <ul>
+      <li><a href="dash_empleado.html"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+      <li><a href="checks_empleado.html"><i class="fas fa-door-open"></i><span>Entradas/Salidas</span></a></li>
+      <li><a href="#"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+    </ul>
+  </div>
+  <div class="bottom-links">
+    <ul>
+      <li><i class="fas fa-exclamation-circle"></i><span>Reportar Incidencia</span></li>
+      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  
+  <!-- Header superior -->
+  <header>
+    <div>Gestión de Entradas y Salidas</div>
+    <div class="notifications">🔔</div>
+  </header>
+
+  <!-- Contenido de la página -->
+  <div class="container">
+
+    <button id="toggleFilters" class="btn_filter">Filtrar Busqueda</button>
+
+    <div class="filters" id="filtersPanel" style="display: none;">
+      <select  id="hotelFilter">
+        <option value="">Todos los Hoteles</option>
+        <option value="Hotel A">Hotel A</option>
+        <option value="Hotel B">Hotel B</option>
+      </select>
+    
+      <label><input type="checkbox" id="checkinPending">Check-ins pendientes</label>
+      <label><input type="checkbox" id="checkoutPending">Check-outs pendientes</label>
+    
+      <button id="clearFilters">Limpiar filtro</button>
+    </div>
+
+
+    <table>
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Hotel</th>
+          <th>Habitación</th>
+          <th>Fecha de Entrada</th>
+          <th>Fecha de Salida</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="check-in">
+          <td>Juan Pérez</td>
+          <td>Duna</td>
+          <td>101</td>
+          <td>Hoy</td>
+          <td>28/04</td>
+          <td>Pendiente de Check-in</td>
+          <td><button>Confirmar Check-in</button></td>
+        </tr>
+        <tr class="check-out">
+          <td>Laura Gómez</td>
+          <td>Luna</td>
+          <td>102</td>
+          <td>24/04</td>
+          <td>Hoy</td>
+          <td>Pendiente de Check-out</td>
+          <td><button>Confirmar Check-out</button></td>
+        </tr>
+        <tr class="check-in">
+          <td>Pedro López</td>
+          <td>Marea Baja</td>
+          <td>103</td>
+          <td>Hoy</td>
+          <td>29/04</td>
+          <td>Pendiente de Check-in</td>
+          <td><button>Confirmar Check-in</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
