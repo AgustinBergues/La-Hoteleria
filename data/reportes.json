@@ -1,8 +1,18 @@
 [
     {
+        "id": 0,
         "texto": "El sistema anda lento.",
         "estado": "aceptada",
         "respuesta": "Estamos trabajando en ello.",
         "empleado": "Agustin Bergues"
+    },
+
+    {
+        "id": 1,
+        "texto": "Los botones principales del menu de empleado a veces andan y a veces no.",
+        "estado": "pendiente",
+        "respuesta": "Estamos trabajando en ello.",
+        "empleado": "Tobias Millan"
     }
+
 ]

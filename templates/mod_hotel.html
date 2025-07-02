@@ -62,7 +62,7 @@
 
     <!-- Header superior -->
     <header>
-      <div class="title">Reportes</div>
+      <div class="title">Hoteles</div>
       <div class="notifications">🔔</div>
     </header>
 
@@ -95,7 +95,6 @@
                   </td>
                   <td>{{ hotel.visitas }}</td>
                   <td>
-                      <button onclick="editarHotel({{ hotel | tojson }})">Editar</button>
                       <form method="POST" action="/eliminar_hotel" style="display:inline;" onsubmit="return confirmarEliminacion()">
                           <input type="hidden" name="id" value="{{ hotel.id }}">
                           <button type="submit">Eliminar</button>

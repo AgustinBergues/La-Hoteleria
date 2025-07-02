@@ -55,14 +55,14 @@
         </div>
       </a>
 
-      <a href="{{ url_for('habitaciones_info') }}">
+      <a href="{{ url_for('habitaciones_admin_ocupadas') }}">
         <div class="card">
             <h2>{{ ocupadas }}</h2>
             <p>Habitaciones Ocupadas</p>
         </div>
       </a>
 
-      <a href="{{ url_for('habitaciones_info') }}">
+      <a href="{{ url_for('habitaciones_admin_disponibles') }}">
         <div class="card">
           <h2>{{ disponibles }}</h2>
           <p>Habitaciones Disponibles</p>
@@ -71,43 +71,64 @@
 
     </div>
 
+
+
     <!-- Tabla de mantenimientos programados -->
     <div class="maintenance-overview">
-        <h3>Mantenimientos Programados</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Mantenimiento</th>
-              <th>Hotel</th>
-              <th>Habitación</th>
-              <th>Hora</th>
-              <th>Info</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for data in mantenimientos %}
-            <tr>
-              <td>{{ data.tipo }}</td>
-              <td>{{ data.hotel }}</td>
-              <td>{{ data.habitacion_n }}</td>
-              <td>{{ data.programado }}</td>
-              <td><button class="detalles">Ver detalle</button></td>
-            </tr>
+      <h3>Mantenimientos Programados</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Mantenimiento</th>
+            <th>Hotel</th>
+            <th>Habitación</th>
+            <th>Hora</th>
+            <th>Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mantenimiento in mantenimientos %}
+          <tr>
+            <td>{{ mantenimiento.tipo }}</td>
+            <td>{{ mantenimiento.hotel }}</td>
+            <td>{{ mantenimiento.habitacion_n }}</td>
+            <td>{{ mantenimiento.programado }}</td>
+            <td>
+              <button class="detalles" onclick="openModal('{{ mantenimiento.id }}')">Ver detalle</button>
+            </td>
+          </tr>
+
+          <div class="modal" id="modal-{{ mantenimiento.id }}">
+            <div class="modal-content">
+              <span class="close" onclick="closeModal('{{ mantenimiento.id }}')">&times;</span>
+              <h2>Mantenimiento: {{ mantenimiento.id }}</h2>
+              <p><strong>Hotel:</strong> {{ mantenimiento.hotel }}</p>
+              <p><strong>Habitación:</strong> {{ mantenimiento.habitacion_n }}</p>
+              <p><strong>Tipo:</strong> {{ mantenimiento.tipo }}</p>
+              <p><strong>Programado:</strong> {{ mantenimiento.programado }}</p>
+              <p><strong>A cargo de:</strong> {{ mantenimiento.a_cargo }}</p>
+            </div>
+          </div>
+
             {% endfor %}
 
           </tbody>
         </table>
-      </div>
+    </div>
 
     <div class="reports-overview">
       <h3>Últimos Reportes</h3>
-      <ul>
-        {% for reporte in reportes_recientes %}
-        <li>
-          <strong>{{ reporte.titulo }}</strong> - {{ reporte.fecha }} - <a href="#">Ver más</a>
-        </li>
+      <div class="reportes-grid">
+        {% for reporte in reportes %}
+        <a href="{{ url_for('ver_quejas') }}">
+          <div class="reporte-card">
+            <div class="reporte-titulo">Reporte N°: {{ reporte.id }}</div>
+            <div class="reporte-texto">{{ reporte.texto }}</div>
+            <div class="reporte-empleado">{{ reporte.empleado }}</div>
+          </div>
+        </a>
         {% endfor %}
-      </ul>
+      </div>
     </div>
 
 
@@ -119,13 +140,31 @@
         <div>Ocupadas: {{ ocupadas }}</div>
         <div>En mantenimiento: {{ mantenimiento }}</div>
       </div>
-      <button onclick="location.href='{{ url_for('habitaciones_info') }}'">Ir a Habitaciones</button>
+      <button onclick="location.href='{{ url_for('habitaciones_admin') }}'">Ir a Habitaciones</button>
     </div>
 
 
   </div>
-
 </div>
+
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
+    }
+  </script>
+
 
 </body>
 </html>

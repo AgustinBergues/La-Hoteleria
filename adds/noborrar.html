@@ -1,0 +1,11 @@
+            <div class="modal" id="modal-{{ mantenimientos.id }}">
+              <div class="modal-content">
+                <span class="close" onclick="closeModal('{{ mantenimientos.id }}')">&times;</span>
+                <h2>Mantenimiento: {{ mantenimientos.id }}</h2>
+                <p><strong>Hotel:        </strong> {{ mantenimiento.hotel }}</p>
+                <p><strong>Habitaciones: </strong> {{ mantenimiento.habitacion_n }}</p>
+                <p><strong>Tipo:         </strong> {{ mantenimiento.tipo }}</p>
+                <p><strong>Programado:   </strong> {{ mantenimiento.programado }}</p>
+                <p><strong>A cargo de:   </strong> {{ mantenimiento.a_cargo }}</p>
+              </div>
+            </div>

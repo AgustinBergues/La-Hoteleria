@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../static/habitaciones_a.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <title>Habitaciones</title>
+    <title>Habitaciones Disponibles</title>
 </head>
 <body>
 <nav>
@@ -35,47 +35,9 @@
 
   <!-- Header superior -->
   <header>
-    <div class="title">Habitaciones</div>
+    <div class="title">Habitaciones Disponibles</div>
     <div class="notifications">🔔</div>
   </header>
-
-  
-  <div class="container">
-
-    <h3>Habitaciones Ocupadas</h3>
-
-    <table>
-        <thead>
-            <tr>
-              <th>Habitacion</th>
-              <th>Hotel</th>
-              <th>Tipo</th>
-              <th>Estado</th>
-              <th>N° Reserva</th>
-              <th></th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for data in habitaciones_ocup %}
-            <tr>
-              <td>{{ data.id }}</td>
-              <td>{{ data.hotel_id }}</td>
-              <td>{{ data.tipo }}</td>
-              <td>{{ data.estado }}</td>
-              <td>{{ data.n_reserva }}</td>
-              <td>
-                <button><i class="fa-solid fa-circle-info"></i></button>
-                <form method="POST" action="{{ url_for('habitaciones_admin') }}">
-                  <input type="hidden" name="id" value="{{ data.id }}">
-                  <input type="hidden" name="hotel_id" value="{{ data.hotel_id }}">
-                  <button type="submit"><i class="fa-solid fa-trash"></i></button>
-                </form>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-    </table>
-  </div>
 
 
   <div class="container">

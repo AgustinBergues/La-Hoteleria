@@ -43,6 +43,10 @@ def cargar_mantenimientos():
 def cargar_habitaciones():
     with open('data/habitaciones.json', 'r', encoding='utf-8') as f:
         return json.load(f)
+    
+def cargar_reportes():
+    with open('data/reportes.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
 
 
 def guardar_hoteles(hoteles):
@@ -279,6 +283,8 @@ def admin():
     reservas = cargar_reservas()
     habitaciones = cargar_habitaciones()
     mantenimientos = cargar_mantenimientos()
+    reportes = cargar_reportes()
+    
 
     checkins = sum(1 for r in reservas if r['estado'] == 'Check-in pendiente')
     checkouts = sum(1 for r in reservas if r['estado'] == 'Check-out pendiente')
@@ -287,7 +293,7 @@ def admin():
     ocupadas = sum(1 for h in habitaciones if h['estado'].lower() == 'ocupada')
     mantenimiento = sum(1 for h in habitaciones if h['estado'].lower() == 'mantenimiento')
 
-    return render_template("dashboard_admin.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento)
+    return render_template("dashboard_admin.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento, reportes=reportes)
 
 
 
@@ -426,20 +432,75 @@ def error():
 
 @app.route('/habitaciones_admin', methods=['GET', 'POST'])
 def habitaciones_admin():
+    habitaciones_dispo = []
+    habitaciones_ocup  = [] 
     with open('data/habitaciones.json', 'r') as f:
         habitaciones = json.load(f)
+
+    for i in habitaciones:
+        if i['estado'] == "Disponible":
+            habitaciones_dispo.append(i)
+        if i['estado'] == "Ocupada":
+            habitaciones_ocup.append(i)
+
 
     if request.method == 'POST':
         id_eliminar = int(request.form['id'])
         hotel_id_eliminar = int(request.form['hotel_id'])
         habitaciones = [h for h in habitaciones if not (h['id'] == id_eliminar and h['hotel_id'] == hotel_id_eliminar)]
 
-        with open('data/habitaciones.json', 'w') as f:
-            json.dump(habitaciones, f, indent=2)
-
         return redirect(url_for('habitaciones_admin'))
 
-    return render_template('habitaciones_a.html', habitaciones=habitaciones)
+    return render_template('habitaciones_a.html', habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+
+@app.route('/habitaciones_admin_disponibles', methods=['GET', 'POST'])
+def habitaciones_admin_disponibles():
+    habitaciones_dispo = []
+    habitaciones_ocup  = [] 
+    with open('data/habitaciones.json', 'r') as f:
+        habitaciones = json.load(f)
+        
+    for i in habitaciones:
+        if i['estado'] == "Disponible":
+            habitaciones_dispo.append(i)
+        if i['estado'] == "Ocupada":
+            habitaciones_ocup.append(i)
+
+    if request.method == 'POST':
+        id_eliminar = int(request.form['id'])
+        hotel_id_eliminar = int(request.form['hotel_id'])
+        habitaciones = [h for h in habitaciones if not (h['id'] == id_eliminar and h['hotel_id'] == hotel_id_eliminar)]
+
+        return redirect(url_for('habitaciones_admin_disponibles'))
+
+    return render_template('habitaciones_a_disponibles.html', habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+
+
+@app.route('/habitaciones_admin_ocupadas', methods=['GET', 'POST'])
+def habitaciones_admin_ocupadas():
+    habitaciones_dispo = []
+    habitaciones_ocup  = [] 
+    with open('data/habitaciones.json', 'r') as f:
+        habitaciones = json.load(f)
+        
+    for i in habitaciones:
+        if i['estado'] == "Disponible":
+            habitaciones_dispo.append(i)
+        if i['estado'] == "Ocupada":
+            habitaciones_ocup.append(i)
+
+    if request.method == 'POST':
+        id_eliminar = int(request.form['id'])
+        hotel_id_eliminar = int(request.form['hotel_id'])
+        habitaciones = [h for h in habitaciones if not (h['id'] == id_eliminar and h['hotel_id'] == hotel_id_eliminar)]
+        
+        return redirect(url_for('habitaciones_admin_ocupadas'))
+
+    return render_template('habitaciones_a_ocupadas.html', habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+
+
+
+
 
 @app.route('/usuarios_admin', methods=['GET', 'POST'])
 def usuarios_admin():
