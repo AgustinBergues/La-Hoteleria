@@ -23,7 +23,7 @@
   <div class="bottom-links">
     <ul>
       <li><i class="fas fa-exclamation-circle"></i><span>Reportar Incidencia</span></li>
-      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+      <li><a href="{{ url_for('micuenta_e') }}"><i class="fas fa-user"></i><span>Mi Cuenta</span></a></li>
     </ul>
   </div>
 </nav>
@@ -39,21 +39,6 @@
 
   <!-- Contenido de la página -->
   <div class="container">
-
-    <button id="toggleFilters" class="btn_filter abc">Filtrar Busqueda</button>
-
-    <div class="filters" id="filtersPanel" style="display: none;">
-      <select  id="hotelFilter">
-        <option value="">Todos los Hoteles</option>
-        <option value="Hotel A">Hotel A</option>
-        <option value="Hotel B">Hotel B</option>
-      </select>
-    
-      <label><input type="checkbox" id="checkinPending">Check-ins pendientes</label>
-      <label><input type="checkbox" id="checkoutPending">Check-outs pendientes</label>
-    
-      <button id="clearFilters">Limpiar filtro</button>
-    </div>
 
 
     <table>
@@ -88,6 +73,6 @@
   </div>
 
 </div>
-  <script src="../static/script.js"></script>
+
 </body>
 </html>

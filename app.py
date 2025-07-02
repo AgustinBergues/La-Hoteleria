@@ -55,6 +55,7 @@ def guardar_hoteles(hoteles):
 
 
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -274,6 +275,20 @@ def habitaciones_info():
 
     return render_template("habitaciones_e.html", habitaciones=m_habitaciones)
 
+@app.route('/Micuenta')
+def micuenta_e():
+    if 'user' not in session:
+        return redirect(url_for('home'))
+    
+    usuarios = load_users()
+    usuario = next((u for u in usuarios if u["user"] == session["user"]), None)
+
+    if not usuario:
+        return redirect(url_for('home'))
+
+    return render_template('micuenta_e.html', usuario=usuario)
+
+
 
 
 
@@ -406,6 +421,8 @@ def guardar_hotel_nuevo():
     guardar_hoteles(hoteles)
 
     return redirect(url_for('hoteles_admin'))
+
+
 
 
 
