@@ -1,39 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear reporte</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../static/globals.css">
+  <link rel="stylesheet" href="../static/reportes.css">
+
+  <title>Crear Reporte</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-        }
-        .box-nav {
-            width: 100%;
-        }
 
-        header {
-            text-align: center;
-            background-color: #1f66ff;
-            color: #fff;
-        }
-    </style>
+    <!-- Barra lateral -->
+    <nav>
+      <div>
+        <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
+        <ul>
+          <li><a href="{{ url_for('empleado') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+          <li><a href="{{ url_for('checks') }}"><i class="fas fa-door-open"></i><span>Entradas/Salidas</span></a></li>
+          <li><a href="{{ url_for('habitaciones_info') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+        </ul>
+      </div>
+      <div class="bottom-links">
+        <ul>
+          <li><a href="{{ url_for('reportar') }}"><i class="fas fa-exclamation-circle"></i><span>Reportar Incidencia</span></li></a>
+          <li><a href="{{ url_for('micuenta_e') }}"><i class="fas fa-user"></i><span>Mi Cuenta</span></a></li>
+        </ul>
+      </div>
+    </nav>
 
-
-
-    <div class="box-nav">
-        <nav>
-
-        </nav>
-    </div>
-
-    <div class="content-header">
+    <div class="main-content">
+        <!--      Header      -->
         <header>
-            <h2>Crea tu Reporte</h2>
+            <div class="title">Crear Reporte</div>
+            <div class="notifications">🔔</div>
         </header>
+
+        <div class="content-crear">
+            <form action="">
+
+            
+            <h3>Describa el problema que ha tenido:</h3>
+            <textarea id="reporte" name="reporte" placeholder="Describí aquí lo ocurrido..."></textarea>
+            <div class="cont-boton"><button type="submit">Enviar reporte</button></div>
+            </form>
+
+        </div>
+
+
+
+
     </div>
 
 </body>

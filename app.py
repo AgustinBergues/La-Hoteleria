@@ -275,6 +275,16 @@ def habitaciones_info():
 
     return render_template("habitaciones_e.html", habitaciones=m_habitaciones)
 
+@app.route('/reportar')
+def reportar():
+    
+
+    return render_template('crear_reportes.html')
+
+
+
+
+
 @app.route('/Micuenta')
 def micuenta_e():
     if 'user' not in session:

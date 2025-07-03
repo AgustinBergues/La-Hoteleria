@@ -1,0 +1,44 @@
+body {
+    background-color: #e7e6e6;
+}
+
+
+.content-crear {
+    height: 400px;
+    width: 600px;
+    background-color: #fff;
+    margin: auto;
+    margin-top: 60px;
+    border-radius: 30px;
+    border: .5px solid #000;
+    align-items: center;
+}
+
+.content-crear form {
+    height: 100%;
+}
+
+.content-crear h3 {
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+}
+.content-crear textarea {
+    width: 90%;
+    resize: none;
+    height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+.content-crear button {
+    bottom: 0;
+}
+
+.cont-boton {
+    bottom: 10px;
+}

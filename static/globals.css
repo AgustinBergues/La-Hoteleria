@@ -1,4 +1,11 @@
-    /* Sidebar */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+
+/* Sidebar */
 nav {
   position: fixed;
   top: 0;
