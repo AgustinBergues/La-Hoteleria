@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/globals.css">
+    <link rel="stylesheet" href="../static/habitaciones_a.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Habitaciones Ocupadas</title>
+</head>
+<body>
+    <nav>
+      <div>
+        <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
+        <ul>
+          <li><a href="{{ url_for('empleado') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+          <li><a href="{{ url_for('checks') }}"><i class="fas fa-door-open"></i><span>Entradas/Salidas</span></a></li>
+          <li><a href="{{ url_for('habitaciones_info') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+        </ul>
+      </div>
+      <div class="bottom-links">
+        <ul>
+          <li><a href="{{ url_for('reportar') }}"><i class="fas fa-exclamation-circle"></i><span>Reportar Incidencia</span></li></a>
+          <li><a href="{{ url_for('micuenta_e') }}"><i class="fas fa-user"></i><span>Mi Cuenta</span></a></li>
+        </ul>
+      </div>
+    </nav>    
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+
+    <!-- Header superior -->
+    <header>
+      <div class="title">Habitaciones Ocupadas</div>
+    </header>
+
+  
+    <div class="container">
+
+      <h3>Habitaciones Ocupadas</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Habitacion</th>
+            <th>Hotel</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>N° Reserva</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in habitaciones_ocup %}
+            <tr>
+              <td>{{ data.id }}</td>
+              <td>{{ data.hotel_nombre }}</td>
+              <td>{{ data.tipo }}</td>
+              <td>{{ data.estado }}</td>
+              <td>{{ data.n_reserva }}</td>
+              <td>
+                <button><i class="fa-solid fa-circle-info"  onclick="openModal('{{ data.id }}')"></i></button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% for data in habitaciones_ocup %}
+        <div class="modal" id="modal-{{ data.id }}">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('{{ data.id }}')">&times;</span>
+            <h2>Habitación: {{ data.id }}</h2>
+            <p><strong>Hotel:</strong> {{ data.hotel_nombre }}</p>
+            <p><strong>Tipo:</strong> {{ data.tipo }}</p>
+            <p><strong>Estado:</strong> {{ data.estado }}</p>
+            <p><strong>N° de Reserva:</strong> {{ data.n_reserva }}</p>
+            <p><strong>Reservado por:</strong> {{ data.cliente }}</p>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
+    }
+  </script>
+
+
+</body>
+</html>

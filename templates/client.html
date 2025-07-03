@@ -146,15 +146,8 @@
             <img src="./static/img/Hogar_Viajero.jpg" alt="" class="logo">
         </div>
    </header>
-   {% with mensajes = get_flashed_messages(with_categories=True) %}
-    {% if mensajes %}
-    <div class="flash-container">
-      {% for categoria, mensaje in mensajes %}
-        <div class="flash flash-{{ categoria }}">{{ mensaje }}</div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
+
+
 <style>
 .flash.success {
   background-color: #d4edda;
@@ -242,7 +235,7 @@
         setTimeout(() => {
           flashMessage.remove();
         }, 1000);  // Espera a que termine la transición
-      }, 10000); // 10 segundos
+      }, 5000); // 10 segundos
     }
   });
 </script>

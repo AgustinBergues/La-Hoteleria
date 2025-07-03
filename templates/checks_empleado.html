@@ -61,7 +61,12 @@
           <td>{{ data.checkin }}</td>
           <td>{{ data.checkout }}</td>
           <td>{{ data.estado }}</td>
-          <td><button id="confirm_check">Validar</button></td>
+          <td>
+            <form method="POST" action="{{ url_for('actualizar_estado') }}" onsubmit="return confirmarModificacion()">
+              <input type="hidden" name="reserva_id" value="{{ data.id }}">
+              <button id="confirm_check">Validar</button>
+            </form>
+          </td>
         </tr>
         {% endfor %}
 
@@ -72,6 +77,10 @@
   </div>
 
 </div>
-
+  <script>
+    function confirmarModificacion() {
+      confirm("¿Esta seguro que quiere validar esta acción?");
+    };
+  </script>
 </body>
 </html>

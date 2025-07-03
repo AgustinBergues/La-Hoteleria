@@ -9,7 +9,6 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = '8273645912037485'  # Necesaria para usar flash
-DATA_FILE = 'static/hotels.json'
 hoy = datetime.today()
 hoy = hoy.strftime("%d/%m/%Y")
 
@@ -29,7 +28,7 @@ def load_users():
 
 
 def cargar_hoteles():
-    with open(DATA_FILE, 'r', encoding='utf-8') as f:
+    with open("static/hotels.json", 'r', encoding='utf-8') as f:
         return json.load(f)
     
 def cargar_reservas():
@@ -56,9 +55,14 @@ def guardar_hoteles(hoteles):
 def guardar_reportes(reportes):
     with open('data/reportes.json', 'w', encoding='utf-8') as f:
         json.dump(reportes, f, indent=4, ensure_ascii=False)
+
 def guardar_mantenimientos(mantenimientos):
     with open('data/mantenimientos.json', 'w', encoding='utf-8') as f:
         json.dump(mantenimientos, f, indent=4, ensure_ascii=False)
+
+def guardar_reservas(reservas):
+    with open('data/reservas.json', 'w', encoding='utf-8') as f:
+        json.dump(reservas, f, indent=4, ensure_ascii=False)
 
     
 @app.route('/')
@@ -249,26 +253,94 @@ def empleado():
 
 @app.route('/checks')
 def checks():
-    reservas = cargar_reservas()
+    lista_estados = ["Check-in pendiente" ,"Check-out pendiente", "finalizado"]
+
+    old_reservas = cargar_reservas()
+    reservas = []
+
+    for i in old_reservas:
+        if i['estado'] != "finalizado":
+            reservas.append(i)
+
+
 
     return render_template("checks_empleado.html", reservas=reservas)
 
 
 @app.route('/habitaciones')
 def habitaciones_info():
-    habitaciones = cargar_habitaciones()
-    hotel = cargar_hoteles()
-    m_habitaciones = []
-    for u in habitaciones:
-        for i in hotel:
-            if u['hotel_id'] == i['id']:
-                n_hotel = i['hotel']
-                u['hotel_id'] = str(n_hotel).replace("Hotel ", "")
-                m_habitaciones.append(u)
+    hoteles_id = cargar_hoteles()
+    hoteles_name = []
+    habitaciones_dispo = []
+    habitaciones_ocup  = [] 
+    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
+        habitaciones = json.load(f)
+
+    for i in habitaciones:
+        if i['estado'] == "Disponible":
+            habitaciones_dispo.append(i)
+        if i['estado'] == "Ocupada":
+            habitaciones_ocup.append(i)
+    for i in hoteles_id:
+        select = {"id" : i['id'], 'nombre': i['hotel']}
+        hoteles_name.append(select)
 
 
 
-    return render_template("habitaciones_e.html", habitaciones=m_habitaciones)
+    return render_template("habitaciones_e.html", habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+
+
+@app.route('/habitaciones_empleado_disponibles', methods=['GET', 'POST'])
+def habitaciones_empleado_disponibles():
+    hoteles_id = cargar_hoteles()
+    hoteles_name = {}
+    habitaciones_dispo = []
+
+    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
+        habitaciones = json.load(f)
+
+    for i in hoteles_id:
+        hoteles_name[str(i['id'])] = str(i['hotel']).replace("Hotel ","")
+
+
+
+    for i in habitaciones:
+        if i['estado'] == "Disponible":
+            id_hotel = str(i['hotel_id'])
+            i['hotel_nombre'] = hoteles_name.get(id_hotel, 'Hotel desconocido')
+            habitaciones_dispo.append(i)
+
+
+
+
+    return render_template('habitaciones_e_disponibles.html',habitaciones_dispo=habitaciones_dispo)
+
+
+
+@app.route('/habitaciones_empleado_ocupadas', methods=['GET', 'POST'])
+def habitaciones_empleado_ocupadas():
+    hoteles_id = cargar_hoteles()
+    hoteles_name = {}
+    habitaciones_ocup  = [] 
+
+    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
+        habitaciones = json.load(f)
+        
+    for i in hoteles_id:
+        hoteles_name[str(i['id'])] = str(i['hotel']).replace("Hotel ","")
+
+    for i in habitaciones:
+        if i['estado'] == "Ocupada":
+            id_hotel = str(i['hotel_id'])
+            i['hotel_nombre'] = hoteles_name.get(id_hotel, 'Hotel desconocido')
+            habitaciones_ocup.append(i)
+
+    return render_template('habitaciones_e_ocupadas.html', habitaciones_ocup=habitaciones_ocup)
+
+
+
+
+
 
 @app.route('/reportar', methods=['GET', 'POST'])
 def reportar():
@@ -346,9 +418,31 @@ def admin():
 
 @app.route('/checks_a')
 def checks_a():
+    old_reservas = cargar_reservas()
+    reservas = [i for i in old_reservas if i['estado'] != "finalizado"]
+    return render_template("checks_admin.html", reservas=reservas)
+
+
+@app.route('/actualizar_estado', methods=['POST'])
+def actualizar_estado():
+    reserva_id = int(request.form['reserva_id'])
     reservas = cargar_reservas()
 
-    return render_template("checks_admin.html", reservas=reservas)
+    lista_estados = ["Check-in pendiente", "Check-out pendiente", "finalizado"]
+
+    for reserva in reservas:
+        if reserva['id'] == reserva_id:
+            estado_actual = reserva['estado']
+            try:
+                indice = lista_estados.index(estado_actual)
+                if indice < len(lista_estados) - 1:
+                    reserva['estado'] = lista_estados[indice + 1]
+            except ValueError:
+                pass  # Estado no encontrado, no hacemos nada
+
+    guardar_reservas(reservas)
+    flash('Estado actualizado correctamente.', 'success')
+    return redirect(url_for('checks_a'))
 
 
 
