@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../static/globals.css">
   <link rel="stylesheet" href="../static/e_dashboard.css">
+  <link rel="stylesheet" href="../static/habitaciones_e.css">
   <title>Dashboard Empleado</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -72,31 +73,46 @@
 
     <!-- Tabla de mantenimientos programados -->
     <div class="maintenance-overview">
-        <h3>Mantenimientos Programados</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Mantenimiento</th>
-              <th>Hotel</th>
-              <th>Habitación</th>
-              <th>Hora</th>
-              <th>Info</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for data in mantenimientos %}
-            <tr>
-              <td>{{ data.tipo }}</td>
-              <td>{{ data.hotel }}</td>
-              <td>{{ data.habitacion_n }}</td>
-              <td>{{ data.programado }}</td>
-              <td><button class="detalles">Ver detalle</button></td>
-            </tr>
+      <h3>Mantenimientos Programados</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Mantenimiento</th>
+            <th>Hotel</th>
+            <th>Habitación</th>
+            <th>Hora</th>
+            <th>Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mantenimiento in mantenimientos %}
+          <tr>
+            <td>{{ mantenimiento.tipo }}</td>
+            <td>{{ mantenimiento.hotel }}</td>
+            <td>{{ mantenimiento.habitacion_n }}</td>
+            <td>{{ mantenimiento.programado }}</td>
+            <td>
+              <button class="detalles" onclick="openModal('{{ mantenimiento.id }}')">Ver detalle</button>
+            </td>
+          </tr>
+
+          <div class="modal" id="modal-{{ mantenimiento.id }}">
+            <div class="modal-content">
+              <span class="close" onclick="closeModal('{{ mantenimiento.id }}')">&times;</span>
+              <h2>Mantenimiento: {{ mantenimiento.id }}</h2>
+              <p><strong>Hotel:</strong> {{ mantenimiento.hotel }}</p>
+              <p><strong>Habitación:</strong> {{ mantenimiento.habitacion_n }}</p>
+              <p><strong>Tipo:</strong> {{ mantenimiento.tipo }}</p>
+              <p><strong>Programado:</strong> {{ mantenimiento.programado }}</p>
+              <p><strong>A cargo de:</strong> {{ mantenimiento.a_cargo }}</p>
+            </div>
+          </div>
+
             {% endfor %}
 
           </tbody>
         </table>
-      </div>
+    </div>
 
 
     <!-- Vista rápida de habitaciones -->
@@ -114,6 +130,22 @@
   </div>
 
 </div>
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+      }
+    }
 
+    function closeModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
+    }
+  </script>
 </body>
 </html>

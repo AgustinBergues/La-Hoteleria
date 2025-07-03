@@ -7,10 +7,9 @@ body {
   overflow: hidden;
 }
 
-/* Contenido principal */
 .main-content {
   flex: 1;
-  margin-left: 60px; /* 👈 IMPORTANTE: solo dejamos espacio para el nav cerrado */
+  margin-left: 60px; 
   display: flex;
   flex-direction: column;
   transition: margin-left 0.3s;
@@ -35,4 +34,39 @@ th, td {
 }
 th {
   background-color: #f0f0f0;
+}
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
 }
