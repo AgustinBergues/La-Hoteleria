@@ -12,7 +12,7 @@
             "static/img/extra Aurora.jpeg",
             "static/img/Living Aurora.jpeg"
         ],
-        "visitas": 7,
+        "visitas": 13,
         "google_maps_url": "https://www.google.com.ar/maps/place/B%26B+HOTEL+Roma+Italia+Viminale/@41.8996754,12.4881238,17z/data=!4m10!3m9!1s0x132f61af0635b071:0xd9d11a116660747f!5m3!1s2025-04-29!4m1!1i2!8m2!3d41.8996755!4d12.4929947!16s%2Fg%2F1twt3t6v?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D",
         "precios": {
             "Simple": 50,
@@ -54,7 +54,7 @@
             "static/img/extra Luna.jpg",
             "static/img/Living Luna.jpg"
         ],
-        "visitas": 1,
+        "visitas": 2,
         "google_maps_url": "https://www.google.com/maps/place/Via+Domenico+Alberto+Azuni,+102%2F1,+09124+Cagliari+CA,+Italia/@39.2185957,9.1118689,17z/data=!3m1!4b1!4m5!3m4!1s0x12e73405f2515ceb:0xffe5f4d73b8f539!8m2!3d39.2185957!4d9.1118689?entry=ttu&g_ep=EgoyMDI1MDQwMS4wIKXMDSoASAFQAw%3D%3D",
         "precios": {
             "Simple": 45,
@@ -75,7 +75,7 @@
             "static/img/extra MareaBaja.jpg",
             "static/img/Living MareaBaja.jpg"
         ],
-        "visitas": 0,
+        "visitas": 1,
         "google_maps_url": "https://www.google.com/maps/place/Palazzo+Doglio/data=!4m2!3m1!1s0x0:0xe7882a7e8d11b539?sa=X&ved=1t:2428&ictx=111",
         "precios": {
             "Simple": 40,
@@ -117,7 +117,7 @@
             "static/img/extra Paraíso.jpg",
             "static/img/extra 2 Paraíso.jpg"
         ],
-        "visitas": 7,
+        "visitas": 8,
         "google_maps_url": "https://www.google.com/maps/place/Via+dei+Giudicati,+66,+09131+Cagliari+CA,+Italia/@39.2290356,9.1211639,17z/data=!3m1!4b1!4m6!3m5!1s0x12e7346b2c684a55:0xd6734fbce580dc77!8m2!3d39.2290356!4d9.1237388!16s%2Fg%2F11c2chw8v7?hl=es&entry=ttu&g_ep=EgoyMDI1MDQwMS4wIKXMDSoASAFQAw%3D%3D",
         "precios": {
             "Simple": 65,

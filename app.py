@@ -217,30 +217,17 @@ def formulario_reserva():
     return render_template('Form.html', hotel_id=hotel_id)
 
 
-@app.route('/reservar', methods=['POST'])
+@app.route('/reservas', methods=['POST'])
 def reservar():
     nombre = request.form.get('name')
     telefono = request.form.get('phone')
     correo = request.form.get('email')
     habitacion = request.form.get('room')
 
-
-
     print(f"Reserva recibida: {nombre}, {telefono}, {correo}, {habitacion}")
 
-
+    flash("¡Reserva realizada con éxito!", "success")
     return redirect(url_for('client'))
-
-
-
-
-
-
-
-
-
-
-
 
 
 

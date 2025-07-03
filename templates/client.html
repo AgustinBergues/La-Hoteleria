@@ -129,7 +129,16 @@
     </style>
 </head>
 <body>
-    
+  {% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% if mensajes %}
+      {% for categoria, mensaje in mensajes %}
+        <div class="flash {{ categoria }}">{{ mensaje }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+
+
     <header>
         <a href="{{ url_for('home') }}"><button class="header-button" id="button_back">&#8592; Salir</button></a>
         <h1 class="header-title">Hogar Viajero</h1>
@@ -146,6 +155,21 @@
     </div>
   {% endif %}
 {% endwith %}
+<style>
+.flash.success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #c3e6cb;
+  margin: 20px auto;
+  width: 90%;
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+</style>
+
 
 
 <div class="container">
