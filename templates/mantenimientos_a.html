@@ -22,10 +22,10 @@
       text-align: center;
       font-size: 1.5rem;
       font-weight: 600;
+      margin-bottom: 1.5rem;
     }
 
     .container {
-      padding: 2rem;
       max-width: 900px;
       margin: auto;
     }
@@ -78,16 +78,20 @@
       <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
       <ul>
         <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
-        <li><a href="{{ url_for('hoteles_admin') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
-        <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
-        <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
-        <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
-        <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
-        <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+          <li><a href="{{ url_for('hoteles_admin') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+          <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+          <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+          <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+          <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+          <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+      </ul>
+    </div>
+    <div class="bottom-links">
+      <ul>
         <li><a href="{{ url_for('micuenta') }}"><i class="fas fa-user"></i><span>Mi Cuenta</span></a></li>
       </ul>
     </div>
-  </nav>
+  </nav> 
 
 <!-- Contenido principal -->
 <div class="main-content">
@@ -108,9 +112,22 @@
         <p>Programado: {{ data.programado }}</p>
         <p>A cargo de: {{ data.a_cargo }}</p>
       </div>
-      <button class="btn-devolucion">Cancelar</button>
+
+      <form method="POST" action="/eliminar_mantenimiento" style="display:inline;" onsubmit="return confirmarEliminacion()">
+        <input type="hidden" name="id" value="{{ data.id }}">
+        <button class="btn-devolucion">Cancelar</button>
+      </form>
+
     </div>
   </div>
   {% endfor %}
+
+  <script>
+    function confirmarEliminacion() {
+      confirm("¿Estas seguro que queres borrar este Mantenimiento?");
+    };
+
+  </script>
+
 </body>
 </html>

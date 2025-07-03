@@ -50,12 +50,15 @@ def cargar_reportes():
 
 
 def guardar_hoteles(hoteles):
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
+    with open('static/hotels.json', 'w', encoding='utf-8') as f:
         json.dump(hoteles, f, indent=4, ensure_ascii=False)
 
 def guardar_reportes(reportes):
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
+    with open('data/reportes.json', 'w', encoding='utf-8') as f:
         json.dump(reportes, f, indent=4, ensure_ascii=False)
+def guardar_mantenimientos(mantenimientos):
+    with open('data/mantenimientos.json', 'w', encoding='utf-8') as f:
+        json.dump(mantenimientos, f, indent=4, ensure_ascii=False)
 
     
 @app.route('/')
@@ -280,9 +283,37 @@ def habitaciones_info():
 
     return render_template("habitaciones_e.html", habitaciones=m_habitaciones)
 
-@app.route('/reportar')
+@app.route('/reportar', methods=['GET', 'POST'])
 def reportar():
-    
+    reportes = cargar_reportes()
+
+
+    usuarios = load_users()
+    usuario = next((u for u in usuarios if u["user"] == session["user"]), None)
+    empleado = usuario["nombre"] + " " + usuario["apellido"]
+
+
+    for i in reportes:
+        ultimo_id = int(i['id'])
+
+
+    if request.method == 'POST':
+        # Obtener datos del formulario
+        texto = request.form.get('reporte')
+
+        # Crear estructura del reporte
+        nuevo_reporte = {
+            "id": ultimo_id + 1,
+            "texto": texto,
+            "estado": "pendiente",
+            "respuesta": "",
+            "empleado": empleado
+        }
+        reportes.append(nuevo_reporte)
+
+        guardar_reportes(reportes=reportes)
+
+        return redirect(url_for('empleado'))  # Redirigí a donde quieras después de enviar
 
     return render_template('crear_reportes.html')
 
@@ -462,6 +493,14 @@ def mantenimiento_admin():
 
     return render_template("mantenimientos_a.html", mantenimientos=mantenimientos)
 
+@app.route('/eliminar_mantenimiento', methods=['POST'])
+def eliminar_manteminiento():
+    mantenimiento_id = int(request.form['id'])
+    mantenimientos = cargar_mantenimientos()
+    mantenimientos = [h for h in mantenimientos if h['id'] != mantenimiento_id]
+    guardar_mantenimientos(mantenimientos)
+    return redirect(url_for('mantenimiento_admin'))
+
 
 
 @app.route('/error')
@@ -485,7 +524,6 @@ def habitaciones_admin():
     for i in hoteles_id:
         select = {"id" : i['id'], 'nombre': i['hotel']}
         hoteles_name.append(select)
-    print(hoteles_name)
 
 
 

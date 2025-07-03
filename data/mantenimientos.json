@@ -1,19 +1,18 @@
 [
-    { 
-      "id": 0,
-      "hotel": "Duna",
-      "habitacion_n": 102,
-      "tipo": "Limpieza",
-      "programado": "28/04/2025-10:00 AM",
-      "a_cargo": "Juan Perez"
-  },
-  {
-    "id": 1,
-    "hotel": "Marea Baja",
-    "habitacion_n": 122,
-    "tipo": "Arreglar Puerta",
-    "programado": "30/04/2025-6:00 PM",
-    "a_cargo": "Julian Aguirre"
-  }
-  ]
-  
+    {
+        "id": 0,
+        "hotel": "Duna",
+        "habitacion_n": 102,
+        "tipo": "Limpieza",
+        "programado": "28/04/2025-10:00 AM",
+        "a_cargo": "Juan Perez"
+    },
+    {
+        "id": 1,
+        "hotel": "Marea Baja",
+        "habitacion_n": 122,
+        "tipo": "Arreglar Puerta",
+        "programado": "30/04/2025-6:00 PM",
+        "a_cargo": "Julian Aguirre"
+    }
+]

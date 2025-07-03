@@ -42,5 +42,16 @@
         "password": "scrypt:32768:8:1$fkTa9RNanQ73NWTI$349aa596505c2cda55a1eb48d5f2780b81789e1bdd413f9219e8ede62bfb61393531e14acb3e52b0bd20157c1c51fb5283e15924fd9f8109a341d80a15b00ad4",
         "fecha_nacimiento": "2005-02-04",
         "permisos": "empleado"
+    },
+    {
+        "id": 4,
+        "user": "agus2",
+        "nombre": "sfdafs",
+        "apellido": "safdsf",
+        "telefono": "21412",
+        "email": "vzfsa@gmail.com",
+        "password": "scrypt:32768:8:1$rMeyHLLCtRog03T0$c76d85b9bd0c21b05356b0b3bbf6b5e693a614249dbb6bc9e48dc4d4277e4eeef053de639a17f5b49e4dbe7e81f06b357471b11d0b5824ece1200f544bc255cd",
+        "fecha_nacimiento": "1312-12-31",
+        "permisos": "cliente"
     }
 ]
