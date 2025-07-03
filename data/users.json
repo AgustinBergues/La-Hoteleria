@@ -41,6 +41,6 @@
         "email": "Tobiasmilllangonzalez@gmail.com",
         "password": "scrypt:32768:8:1$fkTa9RNanQ73NWTI$349aa596505c2cda55a1eb48d5f2780b81789e1bdd413f9219e8ede62bfb61393531e14acb3e52b0bd20157c1c51fb5283e15924fd9f8109a341d80a15b00ad4",
         "fecha_nacimiento": "2005-02-04",
-        "permisos": "admin"
+        "permisos": "empleado"
     }
 ]

@@ -53,7 +53,9 @@ def guardar_hoteles(hoteles):
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(hoteles, f, indent=4, ensure_ascii=False)
 
-
+def guardar_reportes(reportes):
+    with open(DATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump(reportes, f, indent=4, ensure_ascii=False)
 
     
 @app.route('/')
@@ -323,6 +325,12 @@ def admin():
 
     return render_template("dashboard_admin.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento, reportes=reportes)
 
+
+@app.route('/checks_a')
+def checks_a():
+    reservas = cargar_reservas()
+
+    return render_template("checks_admin.html", reservas=reservas)
 
 
 
