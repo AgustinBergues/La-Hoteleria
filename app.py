@@ -449,9 +449,11 @@ def error():
 
 @app.route('/habitaciones_admin', methods=['GET', 'POST'])
 def habitaciones_admin():
+    hoteles_id = cargar_hoteles()
+    hoteles_name = []
     habitaciones_dispo = []
     habitaciones_ocup  = [] 
-    with open('data/habitaciones.json', 'r') as f:
+    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
         habitaciones = json.load(f)
 
     for i in habitaciones:
@@ -459,61 +461,60 @@ def habitaciones_admin():
             habitaciones_dispo.append(i)
         if i['estado'] == "Ocupada":
             habitaciones_ocup.append(i)
+    for i in hoteles_id:
+        select = {"id" : i['id'], 'nombre': i['hotel']}
+        hoteles_name.append(select)
+    print(hoteles_name)
 
 
-    if request.method == 'POST':
-        id_eliminar = int(request.form['id'])
-        hotel_id_eliminar = int(request.form['hotel_id'])
-        habitaciones = [h for h in habitaciones if not (h['id'] == id_eliminar and h['hotel_id'] == hotel_id_eliminar)]
-
-        return redirect(url_for('habitaciones_admin'))
 
     return render_template('habitaciones_a.html', habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
 
 @app.route('/habitaciones_admin_disponibles', methods=['GET', 'POST'])
 def habitaciones_admin_disponibles():
+    hoteles_id = cargar_hoteles()
+    hoteles_name = {}
     habitaciones_dispo = []
-    habitaciones_ocup  = [] 
-    with open('data/habitaciones.json', 'r') as f:
+
+    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
         habitaciones = json.load(f)
-        
+
+    for i in hoteles_id:
+        hoteles_name[str(i['id'])] = str(i['hotel']).replace("Hotel ","")
+
+
+
     for i in habitaciones:
         if i['estado'] == "Disponible":
+            id_hotel = str(i['hotel_id'])
+            i['hotel_nombre'] = hoteles_name.get(id_hotel, 'Hotel desconocido')
             habitaciones_dispo.append(i)
-        if i['estado'] == "Ocupada":
-            habitaciones_ocup.append(i)
 
-    if request.method == 'POST':
-        id_eliminar = int(request.form['id'])
-        hotel_id_eliminar = int(request.form['hotel_id'])
-        habitaciones = [h for h in habitaciones if not (h['id'] == id_eliminar and h['hotel_id'] == hotel_id_eliminar)]
 
-        return redirect(url_for('habitaciones_admin_disponibles'))
 
-    return render_template('habitaciones_a_disponibles.html', habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+
+    return render_template('habitaciones_a_disponibles.html',habitaciones_dispo=habitaciones_dispo)
 
 
 @app.route('/habitaciones_admin_ocupadas', methods=['GET', 'POST'])
 def habitaciones_admin_ocupadas():
-    habitaciones_dispo = []
+    hoteles_id = cargar_hoteles()
+    hoteles_name = {}
     habitaciones_ocup  = [] 
-    with open('data/habitaciones.json', 'r') as f:
+
+    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
         habitaciones = json.load(f)
         
+    for i in hoteles_id:
+        hoteles_name[str(i['id'])] = str(i['hotel']).replace("Hotel ","")
+
     for i in habitaciones:
-        if i['estado'] == "Disponible":
-            habitaciones_dispo.append(i)
         if i['estado'] == "Ocupada":
+            id_hotel = str(i['hotel_id'])
+            i['hotel_nombre'] = hoteles_name.get(id_hotel, 'Hotel desconocido')
             habitaciones_ocup.append(i)
 
-    if request.method == 'POST':
-        id_eliminar = int(request.form['id'])
-        hotel_id_eliminar = int(request.form['hotel_id'])
-        habitaciones = [h for h in habitaciones if not (h['id'] == id_eliminar and h['hotel_id'] == hotel_id_eliminar)]
-        
-        return redirect(url_for('habitaciones_admin_ocupadas'))
-
-    return render_template('habitaciones_a_ocupadas.html', habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+    return render_template('habitaciones_a_ocupadas.html', habitaciones_ocup=habitaciones_ocup)
 
 
 

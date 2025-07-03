@@ -59,25 +59,50 @@
           {% for data in habitaciones_dispo %}
             <tr>
               <td>{{ data.id }}</td>
-              <td>{{ data.hotel_id }}</td>
+              <td>{{ data.hotel_nombre }}</td>
               <td>{{ data.tipo }}</td>
               <td>{{ data.estado }}</td>
               <td>{{ data.n_reserva }}</td>
               <td>
-                <button><i class="fa-solid fa-circle-info"></i></button>
-                <form method="POST" action="{{ url_for('habitaciones_admin') }}">
-                  <input type="hidden" name="id" value="{{ data.id }}">
-                  <input type="hidden" name="hotel_id" value="{{ data.hotel_id }}">
-                  <button type="submit"><i class="fa-solid fa-trash"></i></button>
-                </form>
+                  <button><i class="fa-solid fa-circle-info"  onclick="openModal('{{ data.id }}')"></i></button>
               </td>
             </tr>
           {% endfor %}
         </tbody>
     </table>
+
+    {% for data in habitaciones_dispo %}
+      <div class="modal" id="modal-{{ data.id }}">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('{{ data.id }}')">&times;</span>
+          <h2>Habitación: {{ data.id }}</h2>
+          <p><strong>Hotel:</strong> {{ data.hotel_nombre }}</p>
+          <p><strong>Tipo:</strong> {{ data.tipo }}</p>
+          <p><strong>Estado:</strong> {{ data.estado }}</p>
+          <p><strong>N° de Reserva:</strong> {{ data.n_reserva }}</p>
+          <p><strong>Reservado por:</strong> {{ data.cliente }}</p>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 
-</div>
+  </div>
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+      }
+    }
 
+    function closeModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
+    }
+  </script>
 </body>
 </html>

@@ -10,74 +10,103 @@
     <title>Habitaciones Ocupadas</title>
 </head>
 <body>
-<nav>
-  <div>
-    <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
-    <ul>
-      <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
-        <li><a href="{{ url_for('hoteles_admin') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
-        <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
-        <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
-        <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
-        <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
-        <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
-    </ul>
-  </div>
-  <div class="bottom-links">
-    <ul>
-      <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
-    </ul>
-  </div>
-</nav>   
+  <nav>
+    <div>
+      <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
+      <ul>
+        <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+          <li><a href="{{ url_for('hoteles_admin') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+          <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+          <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+          <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+          <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+          <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+      </ul>
+    </div>
+    <div class="bottom-links">
+      <ul>
+        <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+      </ul>
+    </div>
+  </nav>   
 
-<!-- Contenido principal -->
-<div class="main-content">
+  <!-- Contenido principal -->
+  <div class="main-content">
 
-  <!-- Header superior -->
-  <header>
-    <div class="title">Habitaciones Ocupadas</div>
-    <div class="notifications">🔔</div>
-  </header>
+    <!-- Header superior -->
+    <header>
+      <div class="title">Habitaciones Ocupadas</div>
+      <div class="notifications">🔔</div>
+    </header>
 
   
-  <div class="container">
+    <div class="container">
 
-    <h3>Habitaciones Ocupadas</h3>
+      <h3>Habitaciones Ocupadas</h3>
 
-    <table>
+      <table>
         <thead>
-            <tr>
-              <th>Habitacion</th>
-              <th>Hotel</th>
-              <th>Tipo</th>
-              <th>Estado</th>
-              <th>N° Reserva</th>
-              <th></th>
-            </tr>
+          <tr>
+            <th>Habitacion</th>
+            <th>Hotel</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>N° Reserva</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
           {% for data in habitaciones_ocup %}
             <tr>
               <td>{{ data.id }}</td>
-              <td>{{ data.hotel_id }}</td>
+              <td>{{ data.hotel_nombre }}</td>
               <td>{{ data.tipo }}</td>
               <td>{{ data.estado }}</td>
               <td>{{ data.n_reserva }}</td>
               <td>
-                <button><i class="fa-solid fa-circle-info"></i></button>
-                <form method="POST" action="{{ url_for('habitaciones_admin') }}">
-                  <input type="hidden" name="id" value="{{ data.id }}">
-                  <input type="hidden" name="hotel_id" value="{{ data.hotel_id }}">
-                  <button type="submit"><i class="fa-solid fa-trash"></i></button>
-                </form>
+                <button><i class="fa-solid fa-circle-info"  onclick="openModal('{{ data.id }}')"></i></button>
               </td>
             </tr>
           {% endfor %}
         </tbody>
-    </table>
+      </table>
+
+      {% for data in habitaciones_ocup %}
+        <div class="modal" id="modal-{{ data.id }}">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('{{ data.id }}')">&times;</span>
+            <h2>Habitación: {{ data.id }}</h2>
+            <p><strong>Hotel:</strong> {{ data.hotel_nombre }}</p>
+            <p><strong>Tipo:</strong> {{ data.tipo }}</p>
+            <p><strong>Estado:</strong> {{ data.estado }}</p>
+            <p><strong>N° de Reserva:</strong> {{ data.n_reserva }}</p>
+            <p><strong>Reservado por:</strong> {{ data.cliente }}</p>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+
   </div>
 
-</div>
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
+    }
+  </script>
+
 
 </body>
 </html>
