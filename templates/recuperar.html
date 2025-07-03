@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recuperar Cuenta</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+    }
+
+    .content-header {
+      text-align: center;
+      background-color: #0077b6;
+      width: 100%;
+      padding: 10px 0;
+      color: white;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .title {
+      text-align: left;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .message {
+      text-align: center;
+      margin: 30px 0;
+      font-size: 16px;
+    }
+
+    .btn-login {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .btn-login a {
+      text-decoration: none;
+    }
+
+    .btn-login button {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-login button:hover {
+      background-color: #005f87;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="content-header">
+      <header>
+        <h1>Hogar Viajero</h1>
+      </header>
+    </div>
+    
+    <h1 class="title">Recuperar tu Contraseña</h1>
+
+    <p class="message">Para recuperar tu cuenta comunicate con un administrador de la página.</p>
+
+    <div class="btn-login">
+      <a href="{{ url_for('home') }}">
+        <button type="button">Volver al Login</button>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

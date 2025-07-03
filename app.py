@@ -55,7 +55,7 @@ def guardar_hoteles(hoteles):
 
 
 
-
+    
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -101,6 +101,9 @@ def login():
         return redirect(url_for('home'))
 
 
+@app.route('/recuperar')
+def recuperar():
+    return render_template('recuperar.html')
 
 
 @app.route('/registro', methods=['GET'])

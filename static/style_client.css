@@ -44,6 +44,34 @@ body {
     color: black;
 
 }
+.flash-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.flash {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeOut 5s forwards;
+}
+
+.flash-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}
+
 
 /*                 SERVICIOS PAGE                 */
 
