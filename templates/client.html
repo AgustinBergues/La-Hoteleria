@@ -232,5 +232,20 @@
     <footer>
         <p>&copy; 2025 Hoteles - Todos los derechos reservados.</p>
     </footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const flashMessage = document.querySelector('.flash.success');
+    if (flashMessage) {
+      setTimeout(() => {
+        flashMessage.style.opacity = '0';
+        setTimeout(() => {
+          flashMessage.remove();
+        }, 1000);  // Espera a que termine la transición
+      }, 10000); // 10 segundos
+    }
+  });
+</script>
+
 </body>
 </html>
