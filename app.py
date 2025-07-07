@@ -12,7 +12,7 @@ app.secret_key = '8273645912037485'  # Necesaria para usar flash
 hoy = datetime.today()
 hoy = hoy.strftime("%d/%m/%Y")
 
-print(hoy)
+
 
 impuestos = {
     "Alquiler_online": 10,  
@@ -108,7 +108,7 @@ def login():
     except Exception as e:
         flash(f"Ocurrió un error: {str(e)}", "error")
         return redirect(url_for('home'))
-
+    
 
 @app.route('/recuperar')
 def recuperar():
@@ -267,27 +267,36 @@ def checks():
     return render_template("checks_empleado.html", reservas=reservas)
 
 
+
 @app.route('/habitaciones')
 def habitaciones_info():
-    hoteles_id = cargar_hoteles()
-    hoteles_name = []
-    habitaciones_dispo = []
-    habitaciones_ocup  = [] 
-    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
-        habitaciones = json.load(f)
+    habitaciones = cargar_habitaciones()
+    hoteles = cargar_hoteles()
+    reservas = cargar_reservas()
 
-    for i in habitaciones:
-        if i['estado'] == "Disponible":
-            habitaciones_dispo.append(i)
-        if i['estado'] == "Ocupada":
-            habitaciones_ocup.append(i)
-    for i in hoteles_id:
-        select = {"id" : i['id'], 'nombre': i['hotel']}
-        hoteles_name.append(select)
+    # Crear un diccionario para encontrar huésped por habitación
+    reserva_info = {}
+    for r in reservas:
+        if r['estado'].lower() != 'cancelada':
+            reserva_info[r['habitacion_n']] = {
+                'huesped': r['huesped'],
+                'celular': r['celular']
+            }
 
+    hoteles_dict = {h["id"]: h["hotel"] for h in hoteles}
+    matriz = {}
 
+    for h in habitaciones:
+        hotel_nombre = hoteles_dict.get(h["hotel_id"], "Desconocido")
+        if hotel_nombre not in matriz:
+            matriz[hotel_nombre] = []
+        # Agregar datos si hay reserva
+        info = reserva_info.get(h["id"], {})
+        h['huesped'] = info.get('huesped', 'N/A')
+        h['celular'] = info.get('celular', 'N/A')
+        matriz[hotel_nombre].append(h)
 
-    return render_template("habitaciones_e.html", habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+    return render_template("habitaciones_matriz_e.html", matriz=matriz)
 
 
 @app.route('/habitaciones_empleado_disponibles', methods=['GET', 'POST'])
@@ -314,7 +323,6 @@ def habitaciones_empleado_disponibles():
 
 
     return render_template('habitaciones_e_disponibles.html',habitaciones_dispo=habitaciones_dispo)
-
 
 
 @app.route('/habitaciones_empleado_ocupadas', methods=['GET', 'POST'])
@@ -588,27 +596,35 @@ def eliminar_manteminiento():
 def error():
     return render_template("error_page.html")
 
-@app.route('/habitaciones_admin', methods=['GET', 'POST'])
+@app.route('/habitaciones_a')
 def habitaciones_admin():
-    hoteles_id = cargar_hoteles()
-    hoteles_name = []
-    habitaciones_dispo = []
-    habitaciones_ocup  = [] 
-    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
-        habitaciones = json.load(f)
+    habitaciones = cargar_habitaciones()
+    hoteles = cargar_hoteles()
+    reservas = cargar_reservas()
 
-    for i in habitaciones:
-        if i['estado'] == "Disponible":
-            habitaciones_dispo.append(i)
-        if i['estado'] == "Ocupada":
-            habitaciones_ocup.append(i)
-    for i in hoteles_id:
-        select = {"id" : i['id'], 'nombre': i['hotel']}
-        hoteles_name.append(select)
+    # Crear un diccionario para encontrar huésped por habitación
+    reserva_info = {}
+    for r in reservas:
+        if r['estado'].lower() != 'cancelada':
+            reserva_info[r['habitacion_n']] = {
+                'huesped': r['huesped'],
+                'celular': r['celular']
+            }
 
+    hoteles_dict = {h["id"]: h["hotel"] for h in hoteles}
+    matriz = {}
 
+    for h in habitaciones:
+        hotel_nombre = hoteles_dict.get(h["hotel_id"], "Desconocido")
+        if hotel_nombre not in matriz:
+            matriz[hotel_nombre] = []
+        # Agregar datos si hay reserva
+        info = reserva_info.get(h["id"], {})
+        h['huesped'] = info.get('huesped', 'N/A')
+        h['celular'] = info.get('celular', 'N/A')
+        matriz[hotel_nombre].append(h)
 
-    return render_template('habitaciones_a.html', habitaciones=habitaciones, habitaciones_dispo=habitaciones_dispo, habitaciones_ocup=habitaciones_ocup)
+    return render_template("habitaciones_matriz_a.html", matriz=matriz)
 
 @app.route('/habitaciones_admin_disponibles', methods=['GET', 'POST'])
 def habitaciones_admin_disponibles():
@@ -715,35 +731,7 @@ def actualizar_reporte():
         return jsonify({'error': str(e)}), 500
     
 
-@app.route('/habitaciones_matriz')
-def habitaciones_matriz():
-    habitaciones = cargar_habitaciones()
-    hoteles = cargar_hoteles()
-    reservas = cargar_reservas()
 
-    # Crear un diccionario para encontrar huésped por habitación
-    reserva_info = {}
-    for r in reservas:
-        if r['estado'].lower() != 'cancelada':
-            reserva_info[r['habitacion_n']] = {
-                'huesped': r['huesped'],
-                'celular': r['celular']
-            }
-
-    hoteles_dict = {h["id"]: h["hotel"] for h in hoteles}
-    matriz = {}
-
-    for h in habitaciones:
-        hotel_nombre = hoteles_dict.get(h["hotel_id"], "Desconocido")
-        if hotel_nombre not in matriz:
-            matriz[hotel_nombre] = []
-        # Agregar datos si hay reserva
-        info = reserva_info.get(h["id"], {})
-        h['huesped'] = info.get('huesped', 'N/A')
-        h['celular'] = info.get('celular', 'N/A')
-        matriz[hotel_nombre].append(h)
-
-    return render_template("habitaciones_matriz.html", matriz=matriz)
 
 
 

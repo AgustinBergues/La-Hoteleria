@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Habitaciones</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/globals.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #3b82f6;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .content {
+      margin-left: 60px;
+      padding: 2rem;
+    }
+
+    .leyenda {
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+      font-weight: bold;
+    }
+
+    .leyenda span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cuadro {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .room {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      border-radius: 10px;
+      font-weight: bold;
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .room:focus {
+      outline: none;
+    }
+
+    .disponible {
+      background-color: #22c55e;
+    }
+
+    .ocupada {
+      background-color: #ef4444;
+    }
+
+    .mantenimiento {
+      background-color: #f59e0b;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra lateral -->
+  <nav>
+    <div>
+      <div class="logo"><img src="{{ url_for('static', filename='img/Hogar_Viajero-Recuperado.png') }}" alt="Logo" ></div>
+      <ul>
+        <li><a href="{{ url_for('admin') }}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+        <li><a href="{{ url_for('hoteles_admin') }}"><i class="fas fa-hotel"></i><span>Hoteles</span></a></li>
+        <li><a href="{{ url_for('habitaciones_admin') }}"><i class="fas fa-bed"></i><span>Habitaciones</span></a></li>
+        <li><a href="{{ url_for('reservas_admin') }}"><i class="fas fa-calendar-alt"></i><span>Reservas</span></a></li>
+        <li><a href="{{ url_for('mantenimiento_admin') }}"><i class="fas fa-tools"></i><span>Mantenimientos</span></a></li>
+        <li><a href="{{ url_for('usuarios_admin') }}"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
+        <li><a href="{{ url_for('ver_quejas') }}"><i class="fas fa-exclamation-circle"></i><span>Reportes</span></a></li>
+      </ul>
+    </div>
+    <div class="bottom-links">
+      <ul>
+        <li><i class="fas fa-user"></i><span>Mi Cuenta</span></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Barra superior -->
+  <header>
+    <div class="title">Habitaciones</div>
+    <div class="notifications">🔔</div>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="content">
+
+    <!-- Leyenda -->
+    <div class="leyenda">
+      <span><div class="cuadro" style="background-color:#22c55e;"></div> Disponible</span>
+      <span><div class="cuadro" style="background-color:#ef4444;"></div> Ocupada</span>
+      <span><div class="cuadro" style="background-color:#f59e0b;"></div> Mantenimiento</span>
+    </div>
+
+    <!-- Matriz de habitaciones -->
+    {% for hotel, habitaciones in matriz.items() %}
+      <h2>{{ hotel }}</h2>
+      <div class="grid">
+        {% for h in habitaciones %}
+          <button class="room {{ h.estado | lower }}" data-id="{{ h.id }}" data-estado="{{ h.estado }}" data-nombre="{{ h.huesped }}" data-telefono="{{ h.celular }}">
+            {{ h.id }}
+          </button>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Habitación <span id="modal-id"></span></h2>
+      <p><strong>Estado:</strong> <span id="modal-estado"></span></p>
+      <p><strong>Huésped:</strong> <span id="modal-nombre"></span></p>
+      <p><strong>Teléfono:</strong> <span id="modal-telefono"></span></p>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const modal = document.getElementById('modal');
+    const modalId = document.getElementById('modal-id');
+    const modalEstado = document.getElementById('modal-estado');
+    const modalNombre = document.getElementById('modal-nombre');
+    const modalTelefono = document.getElementById('modal-telefono');
+    const closeBtn = document.querySelector('.close');
+
+    document.querySelectorAll('.room').forEach(button => {
+      button.addEventListener('click', () => {
+        modalId.textContent = button.dataset.id;
+        modalEstado.textContent = button.dataset.estado;
+        modalNombre.textContent = button.dataset.nombre || 'N/A';
+        modalTelefono.textContent = button.dataset.telefono || 'N/A';
+        modal.classList.remove('hidden');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  </script>
+
+</body>
+</html>
