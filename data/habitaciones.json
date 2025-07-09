@@ -163,9 +163,9 @@
     "id": 120,
     "hotel_id": 0,
     "tipo": "Suite",
-    "estado": "Disponible",
-    "n_reserva": "",
-    "cliente": ""
+    "estado": "Ocupada",
+    "n_reserva": "5",
+    "cliente": "ignacio"
   },
   {
     "id": 121,
@@ -1123,9 +1123,9 @@
     "id": 120,
     "hotel_id": 4,
     "tipo": "Suite",
-    "estado": "Disponible",
-    "n_reserva": "",
-    "cliente": ""
+    "estado": "Ocupada",
+    "n_reserva": "7",
+    "cliente": "autista"
   },
   {
     "id": 121,
@@ -1283,9 +1283,9 @@
     "id": 110,
     "hotel_id": 5,
     "tipo": "Doble",
-    "estado": "Disponible",
-    "n_reserva": "",
-    "cliente": ""
+    "estado": "Ocupada",
+    "n_reserva": "6",
+    "cliente": "ignacio"
   },
   {
     "id": 111,
@@ -1523,9 +1523,9 @@
     "id": 110,
     "hotel_id": 6,
     "tipo": "Doble",
-    "estado": "Disponible",
-    "n_reserva": "",
-    "cliente": ""
+    "estado": "Ocupada",
+    "n_reserva": 8,
+    "cliente": "leo lopez"
   },
   {
     "id": 111,

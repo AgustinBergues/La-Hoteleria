@@ -223,15 +223,78 @@ def formulario_reserva():
 
 @app.route('/reservas', methods=['POST'])
 def reservar():
+    hoteles = cargar_hoteles()
+    nombre_hotel = next((h["hotel"] for h in hoteles if h["id"] == hotel_actual), "Desconocido")
+    global hotel_actual
+
+
+
     nombre = request.form.get('name')
     telefono = request.form.get('phone')
     correo = request.form.get('email')
-    habitacion = request.form.get('room')
+    tipo_habitacion = request.form.get('hotel')  # este es el tipo: Simple, Doble, etc.
 
-    print(f"Reserva recibida: {nombre}, {telefono}, {correo}, {habitacion}")
+    # Cargar habitaciones
+    with open('data/habitaciones.json', 'r', encoding='utf-8') as f:
+        habitaciones = json.load(f)
+
+    # Buscar una habitación disponible del tipo solicitado en el hotel actual
+    habitacion_disponible = next(
+        (h for h in habitaciones if h["hotel_id"] == hotel_actual and h["tipo"] == tipo_habitacion and h["estado"] == "Disponible"),
+        None
+    )
+
+    if not habitacion_disponible:
+        flash("No hay habitaciones disponibles de ese tipo.", "danger")
+        return redirect(url_for('formulario_reserva'))
+
+    # Marcar habitación como ocupada (opcional)
+    habitacion_disponible["estado"] = "Ocupada"
+
+    # Guardar actualización en habitaciones.json
+    with open('data/habitaciones.json', 'w', encoding='utf-8') as f:
+        json.dump(habitaciones, f, indent=2, ensure_ascii=False)
+
+    # Cargar reservas existentes
+    with open('data/reservas.json', 'r', encoding='utf-8') as f:
+        reservas = json.load(f)
+
+    nueva_reserva = {
+        "id": len(reservas),
+        "huesped": nombre,
+        "celular": telefono,
+        "email": correo,
+        "hotel": nombre_hotel,  
+        "habitacion_n": habitacion_disponible["id"],
+        "tipo": tipo_habitacion,
+        "fecha": datetime.today().strftime('%d-%m-%Y'),
+        "checkin": datetime.today().strftime('%d/%m/%Y'),
+        "checkout": "",
+        "estado": "Check-in pendiente"
+    }
+
+    reservas.append(nueva_reserva)
+    with open('data/reservas.json', 'w', encoding='utf-8') as f:
+        json.dump(reservas, f, indent=2, ensure_ascii=False)
+
+    with open("data/habitaciones.json", "r", encoding="utf-8") as f:
+        habitaciones = json.load(f)
+
+    for h in habitaciones:
+        if int(h["id"]) == int(nueva_reserva["habitacion_n"]) and h["hotel_id"] == hotel_actual:
+            h["estado"] = "Ocupada"
+            h["n_reserva"] = nueva_reserva["id"]
+            h["cliente"] = nueva_reserva["huesped"]
+            break
+
+
+    with open("data/habitaciones.json", "w", encoding="utf-8") as f:
+        json.dump(habitaciones, f, indent=2, ensure_ascii=False)
+
 
     flash("¡Reserva realizada con éxito!", "success")
     return redirect(url_for('client'))
+
 
 
 
@@ -278,7 +341,7 @@ def habitaciones_info():
     reserva_info = {}
     for r in reservas:
         if r['estado'].lower() != 'cancelada':
-            reserva_info[r['habitacion_n']] = {
+            reserva_info[(r['hotel'], r['habitacion_n'])] = {
                 'huesped': r['huesped'],
                 'celular': r['celular']
             }
@@ -291,7 +354,7 @@ def habitaciones_info():
         if hotel_nombre not in matriz:
             matriz[hotel_nombre] = []
         # Agregar datos si hay reserva
-        info = reserva_info.get(h["id"], {})
+        info = reserva_info.get((hotel_nombre, h["id"]), {})
         h['huesped'] = info.get('huesped', 'N/A')
         h['celular'] = info.get('celular', 'N/A')
         matriz[hotel_nombre].append(h)
@@ -327,23 +390,36 @@ def habitaciones_empleado_disponibles():
 
 @app.route('/habitaciones_empleado_ocupadas', methods=['GET', 'POST'])
 def habitaciones_empleado_ocupadas():
-    hoteles_id = cargar_hoteles()
-    hoteles_name = {}
-    habitaciones_ocup  = [] 
+    hoteles = cargar_hoteles()
+    habitaciones = cargar_habitaciones()
+    reservas = cargar_reservas()
 
-    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
-        habitaciones = json.load(f)
-        
-    for i in hoteles_id:
-        hoteles_name[str(i['id'])] = str(i['hotel']).replace("Hotel ","")
+    hoteles_name = {str(h['id']): h['hotel'] for h in hoteles}
+    habitaciones_ocup = []
 
-    for i in habitaciones:
-        if i['estado'] == "Ocupada":
-            id_hotel = str(i['hotel_id'])
-            i['hotel_nombre'] = hoteles_name.get(id_hotel, 'Hotel desconocido')
-            habitaciones_ocup.append(i)
+    # Diccionario de reservas con clave (nombre_hotel, id_habitacion)
+    reservas_dict = {
+        (r['hotel'], r['habitacion_n']): r
+        for r in reservas if r['estado'].lower() != 'cancelada'
+    }
+
+    for h in habitaciones:
+        if h['estado'] == "Ocupada":
+            id_hotel = str(h['hotel_id'])
+            hotel_nombre = hoteles_name.get(id_hotel, 'Hotel desconocido')
+            h['hotel_nombre'] = hotel_nombre
+
+            # Usamos la clave compuesta para encontrar la reserva correcta
+            reserva = reservas_dict.get((hotel_nombre, h['id']))
+            h['n_reserva'] = reserva['id'] if reserva else 'N/A'
+            h['cliente'] = reserva['huesped'] if reserva else 'N/A'
+            habitaciones_ocup.append(h)
 
     return render_template('habitaciones_e_ocupadas.html', habitaciones_ocup=habitaciones_ocup)
+
+
+
+
 
 
 
@@ -606,7 +682,7 @@ def habitaciones_admin():
     reserva_info = {}
     for r in reservas:
         if r['estado'].lower() != 'cancelada':
-            reserva_info[r['habitacion_n']] = {
+            reserva_info[(r['hotel'], r['habitacion_n'])] = {
                 'huesped': r['huesped'],
                 'celular': r['celular']
             }
@@ -619,7 +695,7 @@ def habitaciones_admin():
         if hotel_nombre not in matriz:
             matriz[hotel_nombre] = []
         # Agregar datos si hay reserva
-        info = reserva_info.get(h["id"], {})
+        info = reserva_info.get((hotel_nombre, h["id"]), {})
         h['huesped'] = info.get('huesped', 'N/A')
         h['celular'] = info.get('celular', 'N/A')
         matriz[hotel_nombre].append(h)
@@ -654,23 +730,33 @@ def habitaciones_admin_disponibles():
 
 @app.route('/habitaciones_admin_ocupadas', methods=['GET', 'POST'])
 def habitaciones_admin_ocupadas():
-    hoteles_id = cargar_hoteles()
-    hoteles_name = {}
-    habitaciones_ocup  = [] 
+    hoteles = cargar_hoteles()
+    habitaciones = cargar_habitaciones()
+    reservas = cargar_reservas()
 
-    with open('data/habitaciones.json', 'r', encoding="UTF-8") as f:
-        habitaciones = json.load(f)
-        
-    for i in hoteles_id:
-        hoteles_name[str(i['id'])] = str(i['hotel']).replace("Hotel ","")
+    hoteles_name = {str(h['id']): h['hotel'] for h in hoteles}
+    habitaciones_ocup = []
 
-    for i in habitaciones:
-        if i['estado'] == "Ocupada":
-            id_hotel = str(i['hotel_id'])
-            i['hotel_nombre'] = hoteles_name.get(id_hotel, 'Hotel desconocido')
-            habitaciones_ocup.append(i)
+    # Diccionario de reservas con clave (nombre_hotel, id_habitacion)
+    reservas_dict = {
+        (r['hotel'], r['habitacion_n']): r
+        for r in reservas if r['estado'].lower() != 'cancelada'
+    }
+
+    for h in habitaciones:
+        if h['estado'] == "Ocupada":
+            id_hotel = str(h['hotel_id'])
+            hotel_nombre = hoteles_name.get(id_hotel, 'Hotel desconocido')
+            h['hotel_nombre'] = hotel_nombre
+
+            # Usamos la clave compuesta para encontrar la reserva correcta
+            reserva = reservas_dict.get((hotel_nombre, h['id']))
+            h['n_reserva'] = reserva['id'] if reserva else 'N/A'
+            h['cliente'] = reserva['huesped'] if reserva else 'N/A'
+            habitaciones_ocup.append(h)
 
     return render_template('habitaciones_a_ocupadas.html', habitaciones_ocup=habitaciones_ocup)
+
 
 
 

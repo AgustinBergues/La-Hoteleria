@@ -2,11 +2,11 @@
   {
     "id": 0,
     "huesped": "Juan Pérez",
-    "hotel": "Duna",
+    "hotel": "Hotel Duna",
     "habitacion_n": 101,
     "tipo": "Simple",
     "fecha": "26-04-2025",
-    "celular": "0928701234", 
+    "celular": "0928701234",
     "checkin": "20/01/2025",
     "checkout": "15/05/2025",
     "estado": "Check-in pendiente"
@@ -14,11 +14,11 @@
   {
     "id": 1,
     "huesped": "María Gómez",
-    "hotel": "Marea Baja",
+    "hotel": "Hotel Marea Baja",
     "habitacion_n": 110,
     "tipo": "Doble",
     "fecha": "05-05-2025",
-    "celular": "0918345678", 
+    "celular": "0918345678",
     "checkin": "15/04/2025",
     "checkout": "20/04/2025",
     "estado": "finalizado"
@@ -26,11 +26,11 @@
   {
     "id": 2,
     "huesped": "Carlos Ruiz",
-    "hotel": "Aurora",
+    "hotel": "Hotel Aurora",
     "habitacion_n": 125,
     "tipo": "Swite",
     "fecha": "25-05-2025",
-    "celular": "1123456789", 
+    "celular": "1123456789",
     "checkin": "10/03/2025",
     "checkout": "17/03/2025",
     "estado": "Check-out pendiente"
@@ -38,11 +38,11 @@
   {
     "id": 3,
     "huesped": "Lucía Fernández",
-    "hotel": "Duna",
+    "hotel": "Hotel Duna",
     "habitacion_n": 104,
     "tipo": "Simple",
     "fecha": "30-05-2025",
-    "celular": "0911234567", 
+    "celular": "0911234567",
     "checkin": "05/05/2025",
     "checkout": "12/05/2025",
     "estado": "Check-in pendiente"
@@ -50,13 +50,65 @@
   {
     "id": 4,
     "huesped": "Matias Torres",
-    "hotel": "Mercurio",
+    "hotel": "Hotel Mercurio",
     "habitacion_n": 119,
     "tipo": "Doble",
     "fecha": "02-06-2025",
-    "celular": "1156848903", 
+    "celular": "1156848903",
     "checkin": "01/06/2025",
     "checkout": "08/06/2025",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 5,
+    "huesped": "ignacio",
+    "celular": "1123560039",
+    "email": "nachorg0705@gmail.com",
+    "hotel": "Hotel Aurora",
+    "habitacion_n": 120,
+    "tipo": "Suite",
+    "fecha": "09-07-2025",
+    "checkin": "09/07/2025",
+    "checkout": "",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 6,
+    "huesped": "ignacio",
+    "celular": "1123560039",
+    "email": "nachorg0705@gmail.com",
+    "hotel": "Hotel Paraíso",
+    "habitacion_n": 110,
+    "tipo": "Doble",
+    "fecha": "09-07-2025",
+    "checkin": "09/07/2025",
+    "checkout": "",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 7,
+    "huesped": "autista",
+    "celular": "12637688",
+    "email": "hola@gmail.com",
+    "hotel": "Hotel Mercurio",
+    "habitacion_n": 120,
+    "tipo": "Suite",
+    "fecha": "09-07-2025",
+    "checkin": "09/07/2025",
+    "checkout": "",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 8,
+    "huesped": "leo lopez",
+    "celular": "12890378",
+    "email": "holaleito@gmail.com",
+    "hotel": "Hotel Shelter",
+    "habitacion_n": 110,
+    "tipo": "Doble",
+    "fecha": "09-07-2025",
+    "checkin": "09/07/2025",
+    "checkout": "",
     "estado": "Check-in pendiente"
   }
 ]

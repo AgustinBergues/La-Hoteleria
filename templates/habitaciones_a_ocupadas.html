@@ -63,7 +63,9 @@
               <td>{{ data.estado }}</td>
               <td>{{ data.n_reserva }}</td>
               <td>
-                <button><i class="fa-solid fa-circle-info"  onclick="openModal('{{ data.id }}')"></i></button>
+                <button onclick="openModal('modal-{{ data.hotel_nombre|replace(' ', '') ~ '-' ~ data.id }}')">
+                <i class="fa-solid fa-circle-info"></i>
+                </button>
               </td>
             </tr>
           {% endfor %}
@@ -71,9 +73,10 @@
       </table>
 
       {% for data in habitaciones_ocup %}
-        <div class="modal" id="modal-{{ data.id }}">
+        <div class="modal" id="modal-{{ data.hotel_nombre|replace(' ', '') ~ '-' ~ data.id }}">
           <div class="modal-content">
-            <span class="close" onclick="closeModal('{{ data.id }}')">&times;</span>
+            <span class="close" onclick="closeModal('modal-{{ data.hotel_nombre|replace(' ', '') ~ '-' ~ data.id }}')">&times;</span>
+
             <h2>Habitación: {{ data.id }}</h2>
             <p><strong>Hotel:</strong> {{ data.hotel_nombre }}</p>
             <p><strong>Tipo:</strong> {{ data.tipo }}</p>
@@ -82,29 +85,29 @@
             <p><strong>Reservado por:</strong> {{ data.cliente }}</p>
           </div>
         </div>
+
       {% endfor %}
 
     </div>
 
   </div>
+<script>
+  function openModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'block';
+    document.body.classList.add('modal-open');
+  }
+}
 
-  <script>
-    function openModal(id) {
-      const modal = document.getElementById('modal-' + id);
-      if (modal) {
-        modal.style.display = 'block';
-        document.body.classList.add('modal-open');
-      }
-    }
-
-    function closeModal(id) {
-      const modal = document.getElementById('modal-' + id);
-      if (modal) {
-        modal.style.display = 'none';
-        document.body.classList.remove('modal-open');
-      }
-    }
-  </script>
+  function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+  }
+}
+</script>
 
 
 </body>
