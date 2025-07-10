@@ -114,7 +114,8 @@ body {
   border-bottom: 1px solid #ddd;
 }
 .maintenance-overview th {
-  background-color: #f2f2f2;
+  background-color: #0077b6;
+  color: #fff;
 }
 
 .detalles {
