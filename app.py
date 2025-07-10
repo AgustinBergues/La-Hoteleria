@@ -19,6 +19,14 @@ impuestos = {
     "Mantenimiento": 5       
 }
 
+def hotel_name():
+    hoteles = cargar_hoteles()
+    nombre_hotel = []
+
+    for i in hoteles:
+        nombre_hotel.append(i["hotel"])
+
+    return nombre_hotel
 
 # Cargar usuarios desde el archivo JSON
 def load_users():
@@ -316,6 +324,8 @@ def empleado():
 
 @app.route('/checks')
 def checks():
+    global admin
+    admin = 0
     lista_estados = ["Check-in pendiente" ,"Check-out pendiente", "finalizado"]
 
     old_reservas = cargar_reservas()
@@ -502,6 +512,8 @@ def admin():
 
 @app.route('/checks_a')
 def checks_a():
+    global admin
+    admin = 1
     old_reservas = cargar_reservas()
     reservas = [i for i in old_reservas if i['estado'] != "finalizado"]
     return render_template("checks_admin.html", reservas=reservas)
@@ -526,7 +538,10 @@ def actualizar_estado():
 
     guardar_reservas(reservas)
     flash('Estado actualizado correctamente.', 'success')
-    return redirect(url_for('checks_a'))
+    if admin == 0:
+        return redirect(url_for('checks'))
+    if  admin == 1:
+        return redirect(url_for('checks_a'))
 
 
 
@@ -761,6 +776,8 @@ def habitaciones_admin_ocupadas():
 def eliminar_reserva(reserva_id):
     reservas = cargar_reservas()
     habitaciones = cargar_habitaciones()
+    nombre_hoteles = hotel_name()
+    act_habitaciones = []
 
     # Buscar la reserva
     reserva = next((r for r in reservas if r['id'] == reserva_id), None)
@@ -769,21 +786,30 @@ def eliminar_reserva(reserva_id):
         return redirect(url_for('reservas_admin'))
 
     # Liberar habitación
+    
+    reserva_id_hotel = nombre_hoteles.index(reserva["hotel"])
+
+
+
     for h in habitaciones:
-        if int(h["id"]) == int(reserva["habitacion_n"]) and h["hotel_id"] is not None:
+        if int(h["id"]) == int(reserva["habitacion_n"]) and h["hotel_id"] == int(reserva_id_hotel):
+            
             h["estado"] = "Disponible"
-            h.pop("n_reserva", None)
-            h.pop("cliente", None)
-            break
+            h["n_reserva"] = ""
+            h["cliente"] = ""
+        act_habitaciones.append(h)
+        
 
     # Eliminar la reserva
     reservas = [r for r in reservas if r['id'] != reserva_id]
 
-    guardar_reservas(reservas)
-    with open("data/habitaciones.json", "w", encoding="utf-8") as f:
-        json.dump(habitaciones, f, indent=4, ensure_ascii=False)
+    guardar_reservas(reservas)    
 
-    flash("Reserva eliminada correctamente.", "success")
+    with open("data/habitaciones.json", "w", encoding="utf-8") as f:
+        json.dump(act_habitaciones, f, indent=4, ensure_ascii=False)
+
+
+    #flash("Reserva eliminada correctamente.", "success")
     return redirect(url_for('reservas_admin'))
 
 
