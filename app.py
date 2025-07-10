@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, flash
 import json
 import os
 from flask import jsonify
-from datetime import datetime
+from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
@@ -269,7 +269,7 @@ def reservar():
         "tipo": tipo_habitacion,
         "fecha": datetime.today().strftime('%d-%m-%Y'),
         "checkin": datetime.today().strftime('%d/%m/%Y'),
-        "checkout": "",
+        "checkout": (datetime.today() + timedelta(days=7)).strftime('%d/%m/%Y'),
         "estado": "Check-in pendiente"
     }
 
