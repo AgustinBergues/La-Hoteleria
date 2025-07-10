@@ -672,7 +672,7 @@ def eliminar_manteminiento():
 def error():
     return render_template("error_page.html")
 
-@app.route('/habitaciones_a')
+@app.route('/habitaciones_admin')
 def habitaciones_admin():
     habitaciones = cargar_habitaciones()
     hoteles = cargar_hoteles()
