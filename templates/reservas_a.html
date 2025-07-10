@@ -104,18 +104,21 @@
   <div class="container">
     {% for data in reservas %}
     <div class="reserva">
-      <div class="info">
-        <h3>Reserva #{{ data.id }}</h3>
-        <p>Cliente: {{ data.huesped }}</p>
-        <p>Telefono: {{ data.celular }}</p>
-        <p>Hotel: {{ data.hotel }}</p>
-        <p>Habitacion: {{ data.habitacion_n }}</p>
-        <p>Tipo: {{ data.tipo }}</p>
-        <p>Fecha: {{ data.fecha }}</p>
-      </div>
-      <button class="btn-devolucion">Dar Devolución</button>
+        <div class="info">
+            <h3>Reserva #{{ data.id }}</h3>
+            <p>Cliente: {{ data.huesped }}</p>
+            <p>Telefono: {{ data.celular }}</p>
+            <p>Hotel: {{ data.hotel }}</p>
+            <p>Habitacion: {{ data.habitacion_n }}</p>
+            <p>Tipo: {{ data.tipo }}</p>
+            <p>Fecha: {{ data.fecha }}</p>
+        </div>
+
+        <form action="{{ url_for('eliminar_reserva', reserva_id=data.id) }}" method="post" onsubmit="return confirm('¿Estás seguro de eliminar esta reserva?');">
+            <button type="submit" class="btn-devolucion">Dar Devolución</button>
+        </form>
     </div>
-    {% endfor %}
+{% endfor %}
 
   </div>
 </body>

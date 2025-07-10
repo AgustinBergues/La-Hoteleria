@@ -757,7 +757,34 @@ def habitaciones_admin_ocupadas():
 
     return render_template('habitaciones_a_ocupadas.html', habitaciones_ocup=habitaciones_ocup)
 
+@app.route('/eliminar_reserva/<int:reserva_id>', methods=['POST'])
+def eliminar_reserva(reserva_id):
+    reservas = cargar_reservas()
+    habitaciones = cargar_habitaciones()
 
+    # Buscar la reserva
+    reserva = next((r for r in reservas if r['id'] == reserva_id), None)
+    if not reserva:
+        flash("Reserva no encontrada.", "error")
+        return redirect(url_for('reservas_admin'))
+
+    # Liberar habitación
+    for h in habitaciones:
+        if int(h["id"]) == int(reserva["habitacion_n"]) and h["hotel_id"] is not None:
+            h["estado"] = "Disponible"
+            h.pop("n_reserva", None)
+            h.pop("cliente", None)
+            break
+
+    # Eliminar la reserva
+    reservas = [r for r in reservas if r['id'] != reserva_id]
+
+    guardar_reservas(reservas)
+    with open("data/habitaciones.json", "w", encoding="utf-8") as f:
+        json.dump(habitaciones, f, indent=4, ensure_ascii=False)
+
+    flash("Reserva eliminada correctamente.", "success")
+    return redirect(url_for('reservas_admin'))
 
 
 
