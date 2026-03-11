@@ -26,7 +26,7 @@ def load_users():
         data = json.load(f)
     return data
 
-
+#lee el json en tipo r (read) y lo convierte a una estructura de python
 def cargar_hoteles():
     with open("static/hotels.json", 'r', encoding='utf-8') as f:
         return json.load(f)
@@ -48,6 +48,8 @@ def cargar_reportes():
         return json.load(f)
 
 
+#se abren en modo de escritura, y convierte la estructura de python en Jsony lo guarda en el archivo f
+# f = archivo abierto donde se va a escribir
 def guardar_hoteles(hoteles):
     with open('static/hotels.json', 'w', encoding='utf-8') as f:
         json.dump(hoteles, f, indent=4, ensure_ascii=False)
@@ -134,7 +136,7 @@ def registrar_usuario():
     user_input = request.form['user']
     email_input = request.form['email']
 
-
+#compara igualdad en usuarios y emails
     for u in usuarios:
         if u['user'].lower() == user_input.lower():
             flash('Nombre de usuario ya registrado. Elegí otro.', 'error')
@@ -201,6 +203,7 @@ def ver_hotel(hotel_id):
     hotel_actual = hotel_id
     # Buscar hotel por id
     hotel = next((h for h in hoteles if h["id"] == hotel_id), None)
+    #guarda el id del hotel que se esta viendo
 
     if hotel:
         hotel["visitas"] += 1
@@ -214,13 +217,13 @@ def ver_hotel(hotel_id):
 
 
 
-
+#ruta para el formulario de reserva
 @app.route('/formulario')
 def formulario_reserva():
     hotel_id=hotel_actual
     return render_template('Form.html', hotel_id=hotel_id)
 
-
+#ruta para procesar una reserva
 @app.route('/reservas', methods=['POST'])
 def reservar():
     hoteles = cargar_hoteles()
@@ -259,6 +262,7 @@ def reservar():
     with open('data/reservas.json', 'r', encoding='utf-8') as f:
         reservas = json.load(f)
 
+    #añadimos una nueva reserva
     nueva_reserva = {
         "id": len(reservas),
         "huesped": nombre,
@@ -287,7 +291,7 @@ def reservar():
             h["cliente"] = nueva_reserva["huesped"]
             break
 
-
+    #se abre el Json y se reemplaza (w) por todo lo que esta en la variable nueva "habitaciones"
     with open("data/habitaciones.json", "w", encoding="utf-8") as f:
         json.dump(habitaciones, f, indent=2, ensure_ascii=False)
 
@@ -314,6 +318,7 @@ def empleado():
 
     return render_template("dash_empleado.html", mantenimientos=mantenimientos, checkins=checkins, checkouts=checkouts, disponibles=disponibles, ocupadas=ocupadas, mantenimiento=mantenimiento)
 
+#muestra solo las reservas pendientes 
 @app.route('/checks')
 def checks():
     lista_estados = ["Check-in pendiente" ,"Check-out pendiente", "finalizado"]
@@ -322,7 +327,7 @@ def checks():
     reservas = []
 
     for i in old_reservas:
-        if i['estado'] != "finalizado":
+        if i['estado'] != "finalizado": #si la reserva NO esta finalizada, la agrega a la lista
             reservas.append(i)
 
 
@@ -416,14 +421,6 @@ def habitaciones_empleado_ocupadas():
             habitaciones_ocup.append(h)
 
     return render_template('habitaciones_e_ocupadas.html', habitaciones_ocup=habitaciones_ocup)
-
-
-
-
-
-
-
-
 
 
 @app.route('/reportar', methods=['GET', 'POST'])
@@ -815,7 +812,7 @@ def actualizar_reporte():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+# se puede ejecutar si por alguna razon el archivo reportes Json se borro y no existe mas.    
 
 
 
