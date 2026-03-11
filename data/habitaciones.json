@@ -3,9 +3,9 @@
     "id": 100,
     "hotel_id": 0,
     "tipo": "Simple",
-    "estado": "Disponible",
-    "n_reserva": "",
-    "cliente": ""
+    "estado": "Ocupada",
+    "n_reserva": 9,
+    "cliente": "Daniel Perez"
   },
   {
     "id": 101,

@@ -61,7 +61,7 @@
   },
   {
     "id": 5,
-    "huesped": "ignacio",
+    "huesped": "Ignacio Rodríguez",
     "celular": "1123560039",
     "email": "nachorg0705@gmail.com",
     "hotel": "Hotel Aurora",
@@ -69,12 +69,12 @@
     "tipo": "Suite",
     "fecha": "09-07-2025",
     "checkin": "09/07/2025",
-    "checkout": "",
+    "checkout": "16/07/2025",
     "estado": "Check-in pendiente"
   },
   {
     "id": 6,
-    "huesped": "ignacio",
+    "huesped": "Ignacio Orgaz",
     "celular": "1123560039",
     "email": "nachorg0705@gmail.com",
     "hotel": "Hotel Paraíso",
@@ -82,12 +82,12 @@
     "tipo": "Doble",
     "fecha": "09-07-2025",
     "checkin": "09/07/2025",
-    "checkout": "",
+    "checkout": "16/07/2025",
     "estado": "Check-in pendiente"
   },
   {
     "id": 7,
-    "huesped": "autista",
+    "huesped": "Bautista Aguilar",
     "celular": "12637688",
     "email": "hola@gmail.com",
     "hotel": "Hotel Mercurio",
@@ -95,7 +95,7 @@
     "tipo": "Suite",
     "fecha": "09-07-2025",
     "checkin": "09/07/2025",
-    "checkout": "",
+    "checkout": "16/07/2025",
     "estado": "Check-in pendiente"
   },
   {
@@ -108,7 +108,20 @@
     "tipo": "Doble",
     "fecha": "09-07-2025",
     "checkin": "09/07/2025",
-    "checkout": "",
+    "checkout": "16/07/2025",
+    "estado": "Check-in pendiente"
+  },
+  {
+    "id": 9,
+    "huesped": "Daniel Perez",
+    "celular": "1123643886",
+    "email": "holadaniel@gmail.com",
+    "hotel": "Hotel Aurora",
+    "habitacion_n": 100,
+    "tipo": "Simple",
+    "fecha": "10-07-2025",
+    "checkin": "10/07/2025",
+    "checkout": "17/07/2025",
     "estado": "Check-in pendiente"
   }
 ]

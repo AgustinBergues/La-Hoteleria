@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, flash
 import json
 import os
 from flask import jsonify
-from datetime import datetime
+from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
@@ -19,6 +19,14 @@ impuestos = {
     "Mantenimiento": 5       
 }
 
+def hotel_name():
+    hoteles = cargar_hoteles()
+    nombre_hotel = []
+
+    for i in hoteles:
+        nombre_hotel.append(i["hotel"])
+
+    return nombre_hotel
 
 # Cargar usuarios desde el archivo JSON
 def load_users():
@@ -273,7 +281,7 @@ def reservar():
         "tipo": tipo_habitacion,
         "fecha": datetime.today().strftime('%d-%m-%Y'),
         "checkin": datetime.today().strftime('%d/%m/%Y'),
-        "checkout": "",
+        "checkout": (datetime.today() + timedelta(days=7)).strftime('%d/%m/%Y'),
         "estado": "Check-in pendiente"
     }
 
@@ -321,6 +329,8 @@ def empleado():
 #muestra solo las reservas pendientes 
 @app.route('/checks')
 def checks():
+    global admin
+    admin = 0
     lista_estados = ["Check-in pendiente" ,"Check-out pendiente", "finalizado"]
 
     old_reservas = cargar_reservas()
@@ -499,6 +509,8 @@ def admin():
 
 @app.route('/checks_a')
 def checks_a():
+    global admin
+    admin = 1
     old_reservas = cargar_reservas()
     reservas = [i for i in old_reservas if i['estado'] != "finalizado"]
     return render_template("checks_admin.html", reservas=reservas)
@@ -523,7 +535,10 @@ def actualizar_estado():
 
     guardar_reservas(reservas)
     flash('Estado actualizado correctamente.', 'success')
-    return redirect(url_for('checks_a'))
+    if admin == 0:
+        return redirect(url_for('checks'))
+    if  admin == 1:
+        return redirect(url_for('checks_a'))
 
 
 
@@ -669,7 +684,7 @@ def eliminar_manteminiento():
 def error():
     return render_template("error_page.html")
 
-@app.route('/habitaciones_a')
+@app.route('/habitaciones_admin')
 def habitaciones_admin():
     habitaciones = cargar_habitaciones()
     hoteles = cargar_hoteles()
@@ -754,7 +769,45 @@ def habitaciones_admin_ocupadas():
 
     return render_template('habitaciones_a_ocupadas.html', habitaciones_ocup=habitaciones_ocup)
 
+@app.route('/eliminar_reserva/<int:reserva_id>', methods=['POST'])
+def eliminar_reserva(reserva_id):
+    reservas = cargar_reservas()
+    habitaciones = cargar_habitaciones()
+    nombre_hoteles = hotel_name()
+    act_habitaciones = []
 
+    # Buscar la reserva
+    reserva = next((r for r in reservas if r['id'] == reserva_id), None)
+    if not reserva:
+        flash("Reserva no encontrada.", "error")
+        return redirect(url_for('reservas_admin'))
+
+    # Liberar habitación
+    
+    reserva_id_hotel = nombre_hoteles.index(reserva["hotel"])
+
+
+
+    for h in habitaciones:
+        if int(h["id"]) == int(reserva["habitacion_n"]) and h["hotel_id"] == int(reserva_id_hotel):
+            
+            h["estado"] = "Disponible"
+            h["n_reserva"] = ""
+            h["cliente"] = ""
+        act_habitaciones.append(h)
+        
+
+    # Eliminar la reserva
+    reservas = [r for r in reservas if r['id'] != reserva_id]
+
+    guardar_reservas(reservas)    
+
+    with open("data/habitaciones.json", "w", encoding="utf-8") as f:
+        json.dump(act_habitaciones, f, indent=4, ensure_ascii=False)
+
+
+    #flash("Reserva eliminada correctamente.", "success")
+    return redirect(url_for('reservas_admin'))
 
 
 
